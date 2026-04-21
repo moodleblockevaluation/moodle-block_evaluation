@@ -1,10 +1,12 @@
-Projekt - Online-Lehrevaluatio Hochschule Neubrandenburg mittels Moodle Feedback und Zusatztools
+Projekt - Online-Lehrevaluatio Hochschule Neubrandenburg mittels Moodle Feedback und Zusatztools 
 
-Projektleitung: Dipl.-Inform. J. Schäfer
+Projektleitung: Dipl.-Inform. J. Schäfer 
 
-2026:
-Projektleitung: Luca Bösch
-Projektteilnehmer: Max Fromme & Christian Peske
+2026: 
+Projektleitung: Luca Bösch 
+Projektteilnehmer:  
+            Max Fromme 
+            Christian Peske 
 
 Block Evaluation
 =================
