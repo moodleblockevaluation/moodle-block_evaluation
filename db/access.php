@@ -1,4 +1,27 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Evaluation block capabilities.
+ *
+ * @package    block_evaluation
+ * @copyright  Neubrandenburg University of Applied Sciences <support_moodle@hs-nb.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 /*  DOCUMENTATION
     .............
 
@@ -41,40 +64,40 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$capabilities = array(
+$capabilities = [
 
     // This allows a user to add the evaluation block.
 
-    'block/evalBlock:addinstance' => array(
+    'block/evaluation:addinstance' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-            'guest' => CAP_PREVENT,       // Prevent Guest user.
-            'user' => CAP_PREVENT,        // Prevent Authenticated user.
-            'student' => CAP_PREVENT,     // Prevent Student user.
-            'teacher' => CAP_PREVENT,     // Prevent teacher user.
-            'editingteacher' => CAP_ALLOW,// Allow Editingteacher user.
+        'archetypes' => [
+            'guest' => CAP_PREVENT, // Prevent Guest user.
+            'user' => CAP_PREVENT, // Prevent Authenticated user.
+            'student' => CAP_PREVENT, // Prevent Student user.
+            'teacher' => CAP_PREVENT, // Prevent teacher user.
+            'editingteacher' => CAP_ALLOW, // Allow Editingteacher user.
             'coursecreator' => CAP_ALLOW, // Allow Coursecreator user.
-            'manager' => CAP_ALLOW        // Allow Manager user.
-        ),
-        'clonepermissionsfrom' => 'moodle/my:manageblocks'
-    ),
+            'manager' => CAP_ALLOW, // Allow Manager user.
+        ],
+        'clonepermissionsfrom' => 'moodle/my:manageblocks',
+    ],
 
     // This allows a user to add evaluation block to their dashboard (My Moodle Page).
 
-    'block/evalBlock:myaddinstance' => array(
+    'block/evaluation:myaddinstance' => [
         'riskbitmask' => RISK_SPAM | RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
-            'guest' => CAP_PREVENT,       // Prevent Guest user.
-            'user' => CAP_PREVENT,        // Prevent Authenticated user.
-            'student' => CAP_PREVENT,     // Prevent Student user.
-            'teacher' => CAP_PREVENT,     // Prevent teacher user.
-            'editingteacher' => CAP_ALLOW,// Allow Editingteacher user.
+        'archetypes' => [
+            'guest' => CAP_PREVENT, // Prevent Guest user.
+            'user' => CAP_PREVENT, // Prevent Authenticated user.
+            'student' => CAP_PREVENT, // Prevent Student user.
+            'teacher' => CAP_PREVENT, // Prevent teacher user.
+            'editingteacher' => CAP_ALLOW, // Allow Editingteacher user.
             'coursecreator' => CAP_ALLOW, // Allow Coursecreator user.
-            'manager' => CAP_ALLOW        // Allow Manager user.
-        ),
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
-    )
-);
+            'manager' => CAP_ALLOW, // Allow Manager user.
+        ],
+        'clonepermissionsfrom' => 'moodle/site:manageblocks',
+    ],
+];
