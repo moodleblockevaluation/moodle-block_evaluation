@@ -32,7 +32,7 @@
 
 // Class name must be named exactly the block folder name.
 class block_evaluation extends block_base {
-    
+
     function init() {
 
         global $CFG;
@@ -49,42 +49,33 @@ class block_evaluation extends block_base {
         global $CFG;
         global $PAGE;
         global $OUTPUT;
-     
+
         if ($this->content !== null) {
             return $this->content;
         }
-        
+
         $this->content = new stdClass;
-        
+
         $userid = $USER->id;
- 
+
         // Userstatus für Darstellung ermitteln  STUD => Studierende; MA => Lehrende
-        $status = $DB->get_field_sql('SELECT institution FROM {user} where id = '.$userid);
-       
- 	$username = $USER->username;       
+        $status = $DB->get_field_sql("SELECT institution FROM {user} where id = '" . $userid . "'");
 
-	$settings_infotext = $DB->get_field_sql('SELECT value FROM {config_plugins}
-        where plugin="block_evaluation"
-        and name="infotext"');
+ 	$username = $USER->username;
 
-        
+        $settings_infotext = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' and name='infotext'");
+
         //role=student
-        
+
         if ($status == 'STUD') {
         //sql querie if feedback was finished
-        $settings_timeopen = $DB->get_field_sql('SELECT value FROM {config_plugins}
-        where plugin="block_evaluation"
-        and name="settings_timeopen"');
-        
-        $settings_timeclose = $DB->get_field_sql('SELECT value FROM {config_plugins}
-        where plugin="block_evaluation"
-        and name="settings_timeclose"');
-        
-        $settings_namelike = $DB->get_field_sql('SELECT value FROM {config_plugins}
-        where plugin="block_evaluation"
-        and name="settings_namelike"');
-        
-        
+            $settings_timeopen = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' and name='settings_timeopen'");
+
+            $settings_timeclose = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' and name='settings_timeclose'");
+
+            $settings_namelike = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' and name='settings_namelike'");
+
+
         $sql='SELECT f.id fid, m.id mid, f.course feedbackcourse, from_unixtime(timeopen) begin, From_unixtime(timeclose) end, f.name feedbackname, c.fullname coursename, k.path coursecategories
 
         ,(SELECT count(*) from {feedback_completed} WHERE userid = '.$userid.' and feedback=f.id) AS ausgefuellt
@@ -112,14 +103,14 @@ WHERE u.id = '.$userid. '
   AND ra.roleid = 5) 
 
         ORDER BY c.fullname, f.name';
-     
+
 
         $datasql = $DB->get_records_sql($sql);
-        
-        
+
+
 
         //table
-        $tableHTML = "<table class=\"table table-bordered\"><thead><tr><th>".get_string('tableheader_1', 'block_evaluation')."<th>".get_string('tableheader_2', 'block_evaluation')."<th>".get_string('tableheader_3', 'block_evaluation')."<th>".get_string('tableheader_4', 'block_evaluation')."</th></tr></thead><tbody>";        
+        $tableHTML = "<table class=\"table table-bordered\"><thead><tr><th>".get_string('tableheader_1', 'block_evaluation')."<th>".get_string('tableheader_2', 'block_evaluation')."<th>".get_string('tableheader_3', 'block_evaluation')."<th>".get_string('tableheader_4', 'block_evaluation')."</th></tr></thead><tbody>";
         foreach ($datasql as $e) {
           $dateformat = DateTime::createFromFormat('Y-m-d H:i:s', $e->end)->format('d.m.y H:i');
           $feedbackurl  = new moodle_url("/mod/feedback/view.php?id=".$e->mid."");
@@ -127,13 +118,13 @@ WHERE u.id = '.$userid. '
                                         $e->coursename,
                                         "<a href = $feedbackurl target = _blank>$e->feedbackname</a>",
                                         $dateformat,
-                                        $e->ausgefuellt));        
+                                        $e->ausgefuellt));
           if ($dataArr[3]==0)
             {$tableHTML .= "<tr><td>$dataArr[0]<td>$dataArr[1]<td>$dataArr[2]<td align=\"center\"><img src=\"".$CFG->wwwroot."/blocks/evaluation/pix/kreuz.png\" width=15></td></tr>";}
             else{$tableHTML .= "<tr><td>$dataArr[0]<td>$dataArr[1]<td>$dataArr[2]<td align=\"center\"><img src=\"".$CFG->wwwroot."/blocks/evaluation/pix/haken.png\" width=15></td></tr>";}
-        }; 
+        };
         $tableHTML .= "</tbody></table></html>";
-        
+
         //print content in block
         $this->content->text = $settings_infotext;
         $this->content->text .= $tableHTML;
@@ -141,26 +132,20 @@ WHERE u.id = '.$userid. '
 //        $this->content->text .= "Userid: ".$userid.", Rolle: ".$userrole;
 
         //echo "<script>console.log(JSON.parse('".json_encode($datasql)."'));</script>";
-        
-        
+
+
         //role = manager, coursecreator, editingteacher, teacher, dekan
         }  elseif ($status == 'MA') {
-        
+
         //sql querie of how many feedbacks are given in assigned courses for teachers
-        $settings_timeopen = $DB->get_field_sql('SELECT value FROM {config_plugins}
-        where plugin="block_evaluation"
-        and name="settings_timeopen"');
-        
-        $settings_timeclose = $DB->get_field_sql('SELECT value FROM {config_plugins}
-        where plugin="block_evaluation"
-        and name="settings_timeclose"');
-        
-        $settings_namelike = $DB->get_field_sql('SELECT value FROM {config_plugins}
-        where plugin="block_evaluation"
-        and name="settings_namelike"');
-        
-	
-        
+            $settings_timeopen = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' and name='settings_timeopen'");
+
+            $settings_timeclose = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' and name='settings_timeclose'");
+
+            $settings_namelike = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' and name='settings_namelike'");
+
+
+
         $sql='SELECT f.id fid, m.id mid, f.course feedbackcourse, from_unixtime(timeopen) begin, From_unixtime(timeclose) end, f.name feedbackname, c.fullname coursename, k.path     coursecategories
 
         ,(SELECT count(distinct(ra.userid)) AS Users FROM {role_assignments} AS ra
@@ -209,11 +194,11 @@ and u.suspended = 0
         ORDER BY c.fullname, f.name';
 
         $datasql = $DB->get_records_sql($sql);
-        
-        
+
+
 
         //table
-        $tableHTML = "<table class=\"table table-bordered\"><thead><tr><th>".get_string('tableheader_1', 'block_evaluation')."<th>".get_string('tableheader_2', 'block_evaluation')."<th>".get_string('tableheader_3', 'block_evaluation')."<th>Studenten insgesamt</th><th>".get_string('tableheader_4', 'block_evaluation')."</th></tr></thead><tbody>";        
+        $tableHTML = "<table class=\"table table-bordered\"><thead><tr><th>".get_string('tableheader_1', 'block_evaluation')."<th>".get_string('tableheader_2', 'block_evaluation')."<th>".get_string('tableheader_3', 'block_evaluation')."<th>Studenten insgesamt</th><th>".get_string('tableheader_4', 'block_evaluation')."</th></tr></thead><tbody>";
         foreach ($datasql as $e) {
           $dateformat = DateTime::createFromFormat('Y-m-d H:i:s', $e->end)->format('d.m.y H:i');
           $feedbackurl  = new moodle_url("/mod/feedback/view.php?id=".$e->mid."");
@@ -222,11 +207,11 @@ and u.suspended = 0
                                         "<a href = $feedbackurl target = _blank>$e->feedbackname</a>",
                                         $dateformat,
                                         $e->studentssum,
-                                        $e->feedbacksum));        
+                                        $e->feedbacksum));
         $tableHTML .= "<tr><td>$dataArr[0]<td>$dataArr[1]<td>$dataArr[2]<td>$dataArr[3]<td>$dataArr[4]</td></tr>";
-        }; 
+        };
         $tableHTML .= "</tbody></table></html>";
-        
+
         //print content in block
 	$this->context->text = $settings_infotext;
         $this->content->text .= $tableHTML;
@@ -234,13 +219,13 @@ and u.suspended = 0
 
         //$this->content->text .= "Userid: ".$username.", Rolle: ".$userrole;
           }
-        
-        
-        
+
+
+
         else {
           $this->content->text = "Keine Berechtigung zur Ansicht";
           }
-        
+
 
 
         return $this->content;
