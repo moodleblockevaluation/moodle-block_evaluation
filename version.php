@@ -35,7 +35,7 @@
     $plugin enable you to add additional features and functionality to the Moodle core.
 
     $plugin->version:
-    The version number of the plugin. The format is partially date based with the format, YYYYMMDDXX 
+    The version number of the plugin. The format is partially date based with the format, YYYYMMDDXX
     (Year Month Day 24-hr time) where 24-hr time can be from 1 to 99. A new plugin version must have this number increased
     in this file, which is detected by the Moodle core and the upgrade process is triggered.
     ex: plugin->version = 2022122700; // Plugin released on 27th December 2022.
