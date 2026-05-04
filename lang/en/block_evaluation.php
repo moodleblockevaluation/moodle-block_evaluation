@@ -1,4 +1,27 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Evaluation block capabilities.
+ *
+ * @package    block_evaluation
+ * @copyright  Neubrandenburg University of Applied Sciences <support_moodle@hs-nb.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 /*  DOCUMENTATION
     .............
 
@@ -14,31 +37,31 @@
     lang folder.
 
 */
+// phpcs:disable moodle.Files.LangFilesOrdering.UnexpectedComment
+// phpcs:disable moodle.Files.LangFilesOrdering.IncorrectOrder
 
-$string['pluginname'] = 'Evaluation Block'; // Name of your plugin.
 $string['evalBlock'] = 'Overview of evaluations'; // Block header name.
-
+$string['pluginname'] = 'Evaluation Block'; // Name of your plugin.
 
 // Strings:access.
 $string['evalBlock:addinstance'] = 'Add a evaluation block';
 $string['evalBlock:myaddinstance'] = 'Add a evaluation block to my Moodle page';
 
 // Strings:settings.
-$string['FrSt_settings_timeopen'] = 'Start:';
 $string['Help_settings_timeopen'] = 'Enter the start of the evaluation here in the format YYYY-MM-DD.';
+$string['FrSt_settings_timeopen'] = 'Start:';
 
-$string['FrSt_settings_timeclose'] = 'End:';
 $string['Help_settings_timeclose'] = 'Enter the end of the evaluation here in the format YYYY-MM-DD.';
+$string['FrSt_settings_timeclose'] = 'End:';
 
-$string['FrSt_settings_namelike'] = 'Contains:';
 $string['Help_settings_namelike'] = 'The name of the evaluation must include this.';
+$string['FrSt_settings_namelike'] = 'Contains:';
 
-$string['FrSt_infotext'] = 'Infotext:';
 $string['Help_infotext'] = 'Enter the text to be displayed above the table here.';
+$string['FrSt_infotext'] = 'Infotext:';
 
 // Strings:table header.
 $string['tableheader_1'] = 'Module name';
 $string['tableheader_2'] = 'All evaluations';
 $string['tableheader_3'] = 'End';
 $string['tableheader_4'] = 'Finished?';
-
