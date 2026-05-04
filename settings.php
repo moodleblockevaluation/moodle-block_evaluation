@@ -25,22 +25,42 @@
 defined('MOODLE_INTERNAL') || die();
 
 
-$settings->add(new admin_setting_configtext('block_evaluation/settings_timeopen', \
- get_string('FrSt_settings_timeopen', 'block_evaluation'), \
- get_string('Help_settings_timeopen', 'block_evaluation'), \
- '2000-01-01', PARAM_TEXT));
+$settings->add(
+    new admin_setting_configtext(
+        'block_evaluation/settings_timeopen',
+        get_string('FrSt_settings_timeopen', 'block_evaluation'),
+        get_string('Help_settings_timeopen', 'block_evaluation'),
+        '2000-01-01',
+        PARAM_TEXT,
+    )
+);
 
-$settings->add(new admin_setting_configtext('block_evaluation/settings_timeclose', \
- get_string('FrSt_settings_timeclose', 'block_evaluation'), \
- get_string('Help_settings_timeclose', 'block_evaluation'), \
- '2030-01-01', PARAM_TEXT));
+$settings->add(
+    new admin_setting_configtext(
+        'block_evaluation/settings_timeclose',
+        get_string('FrSt_settings_timeclose', 'block_evaluation'),
+        get_string('Help_settings_timeclose', 'block_evaluation'),
+        '2030-01-01',
+        PARAM_TEXT,
+    )
+);
 
-$settings->add(new admin_setting_configtext('block_evaluation/settings_namelike', \
- get_string('FrSt_settings_namelike', 'block_evaluation'), \
- get_string('Help_settings_namelike', 'block_evaluation'), \
- 'evaluation', PARAM_TEXT));
+$settings->add(
+    new admin_setting_configtext(
+        'block_evaluation/settings_namelike',
+        get_string('FrSt_settings_namelike', 'block_evaluation'),
+        get_string('Help_settings_namelike', 'block_evaluation'),
+        'evaluation',
+        PARAM_TEXT,
+    )
+);
 
-$settings->add(new admin_setting_configtext('block_evaluation/infotext', \
- get_string('FrSt_infotext', 'block_evaluation'), \
- get_string('Help_infotext', 'block_evaluation'), \
- '', PARAM_TEXT));
+$settings->add(
+    new admin_setting_configtext(
+        'block_evaluation/infotext',
+        get_string('FrSt_infotext', 'block_evaluation'),
+        get_string('Help_infotext', 'block_evaluation'),
+        '',
+        PARAM_TEXT,
+    )
+);
