@@ -1,4 +1,28 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Evaluation block capabilities.
+ *
+ * @package    block_evaluation
+ * @copyright  Neubrandenburg University of Applied Sciences <support_moodle@hs-nb.de>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+
 /*  DOCUMENTATION
     .............
 
@@ -15,26 +39,31 @@
 
 */
 
-$string['pluginname'] = 'Evaluation Block'; // Name of your plugin.
+// Let codechecker ignore some sniffs for this file as it is perfectly well ordered, just not alphabetically.
+// phpcs:disable moodle.Files.LangFilesOrdering.UnexpectedComment
+// phpcs:disable moodle.Files.LangFilesOrdering.IncorrectOrder
+
 $string['evalBlock'] = 'Auflistung der Evaluationen'; // Block header name.
+$string['pluginname'] = 'Evaluation Block'; // Name of your plugin.
+
 
 
 // Strings:access.
-$string['evalBlock:addinstance'] = 'Eine Auflistung der Evaluationen als Block hinzufügen';
-$string['evalBlock:myaddinstance'] = 'Eine Auflistung der Evaluationen als Block auf meiner Moodle Seite hinzufügen';
-
-// Strings:settings.
-$string['FrSt_settings_timeopen'] = 'Beginn:';
-$string['Help_settings_timeopen'] = 'Hier den Beginn der Evaluation in dem Format YYYY-MM-DD angeben.';
-
-$string['FrSt_settings_timeclose'] = 'Ende:';
-$string['Help_settings_timeclose'] = 'Hier das Ende der Evaluation in dem Format YYYY-MM-DD angeben.';
-
+$string['FrSt_infotext'] = 'Infotext:';
 $string['FrSt_settings_namelike'] = 'Beinhaltet:';
+$string['FrSt_settings_timeclose'] = 'Ende:';
+$string['FrSt_settings_timeopen'] = 'Beginn:';
+$string['Help_infotext'] = 'Hier den Text eintragen, der oberhalb der Tabelle angezeigt werden soll.';
 $string['Help_settings_namelike'] = 'Der Name der Evaluation muss dies beinhalten.';
 
-$string['FrSt_infotext'] = 'Infotext:';
-$string['Help_infotext'] = 'Hier den Text eintragen, der oberhalb der Tabelle angezeigt werden soll.';
+$string['Help_settings_timeclose'] = 'Hier das Ende der Evaluation in dem Format YYYY-MM-DD angeben.';
+
+$string['Help_settings_timeopen'] = 'Hier den Beginn der Evaluation in dem Format YYYY-MM-DD angeben.';
+
+$string['evalBlock:addinstance'] = 'Eine Auflistung der Evaluationen als Block hinzufuegen';
+
+$string['evalBlock:myaddinstance'] = 'Eine Auflistung der Evaluationen als Block auf meiner Moodle Seite hinzufuegen';
+
 
 // Strings:table header.
 $string['tableheader_1'] = 'Modulname';
