@@ -104,14 +104,14 @@ class block_evaluation extends block_base {
 
         if ($status == 'STUD') {
             // SQL query if feedback was finished.
-            $settingstimeopen = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND ' .
-            'name='settings_timeopen'");
+            $settingstimeopen = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
+            "name='settings_timeopen'");
 
-            $settingstimeclose = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND ' .
-            'name='settings_timeclose'");
+            $settingstimeclose = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
+            "name='settings_timeclose'");
 
-            $settingsnamelike = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND ' .
-            'name='settings_namelike'");
+            $settingsnamelike = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
+            "name='settings_namelike'");
 
             $sql = 'SELECT f.id fid, m.id mid, f.course feedbackcourse, from_unixtime(timeopen) begin, ' .
             'From_unixtime(timeclose) end, f.name feedbackname, c.fullname coursename, k.path coursecategories
