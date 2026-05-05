@@ -97,22 +97,14 @@ class block_evaluation extends block_base {
 
         $username = $USER->username;
 
-        $settingsinfotext = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
-        "name='infotext'");
+        $settingsinfotext = get_config('block_evaluation', 'infotext');
 
         // Role=student.
-
         if ($status == 'STUD') {
-            // SQL query if feedback was finished.
-
-            $settingstimeopen = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
-            "name='settings_timeopen'");
-
-            $settingstimeclose = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
-            "name='settings_timeclose'");
-
-            $settingsnamelike = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
-            "name='settings_namelike'");
+            // Reading Block Settings.
+            $settingstimeopen = get_config('block_evaluation', 'settings_timeopen');
+            $settingstimeclose = get_config('block_evaluation', 'settings_timeclose');
+            $settingsnamelike = get_config('block_evaluation', 'settings_namelike');
 
             $sql = 'SELECT f.id fid, m.id mid, f.course feedbackcourse, from_unixtime(timeopen) begin, ' .
             'From_unixtime(timeclose) end, f.name feedbackname, c.fullname coursename, k.path coursecategories
@@ -179,14 +171,11 @@ WHERE u.id = ' . $userid . '
                 " target='_blank'>FAQ</a>";
         } else if ($status == 'MA') {
             // SQL query of how many feedbacks are given in assigned courses for teachers.
-            $settingstimeopen = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
-                "name='settings_timeopen'");
 
-            $settingstimeclose = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
-                "name='settings_timeclose'");
-
-            $settingsnamelike = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
-                "name='settings_namelike'");
+            // Reading Block Settings.
+            $settingstimeopen = get_config('block_evaluation', 'settings_timeopen');
+            $settingstimeclose = get_config('block_evaluation', 'settings_timeclose');
+            $settingsnamelike = get_config('block_evaluation', 'settings_namelike');
 
             $sql = 'SELECT f.id fid, m.id mid, f.course feedbackcourse, from_unixtime(timeopen) begin, ' .
                 'From_unixtime(timeclose) end, f.name feedbackname, c.fullname coursename, k.path coursecategories
