@@ -32,7 +32,7 @@ Feature: The evaluation block allow you to see what evaluation there are
     Given I log in as "admin"
     And I navigate to "Appearance > Default Dashboard page" in site administration
     And I turn editing mode on
-    And I add the "Evaluation Block" block
+    And I add the "Evaluation block" block
     And I configure the "Overview of evaluations" block
     And I set the following fields to these values:
       | Region | content |
