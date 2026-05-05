@@ -61,6 +61,8 @@ $string['FrSt_settings_namelike'] = 'Contains:';
 $string['Help_infotext'] = 'Enter the text to be displayed above the table here.';
 $string['FrSt_infotext'] = 'Infotext:';
 
+$string['access_denied'] = 'No permission to view';
+
 // Strings:table header.
 $string['tableheader_1'] = 'Module name';
 $string['tableheader_2'] = 'All evaluations';

@@ -254,7 +254,7 @@ and u.suspended = 0
             $this->content->text .= "<a href='https://support.hs-nb.de/otrs/public.pl?Action=PublicFAQZoom;ItemID=78' " .
                 "target='_blank'>FAQ</a>";
         } else {
-            $this->content->text = "Keine Berechtigung zur Ansicht";
+            echo get_string('access_denied', 'block_evaluation');
         }
 
         return $this->content;
