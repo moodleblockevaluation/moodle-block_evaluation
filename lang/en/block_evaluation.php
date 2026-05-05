@@ -41,8 +41,8 @@
 // phpcs:disable moodle.Files.LangFilesOrdering.IncorrectOrder
 
 $string['evalBlock'] = 'Overview of evaluations'; // Block header name.
-$string['pluginname'] = 'Evaluation Block'; // Name of your plugin.
-$string['privacy:metadata'] = 'The quiz archive plugin does not store any personal data about any user.';
+$string['pluginname'] = 'Evaluation block'; // Name of your plugin.
+$string['privacy:metadata'] = 'The Evaluation block only shows data stored in other locations.';
 
 // Strings:access.
 $string['evalBlock:addinstance'] = 'Add a evaluation block';
