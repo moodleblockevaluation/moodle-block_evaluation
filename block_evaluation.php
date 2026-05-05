@@ -104,6 +104,7 @@ class block_evaluation extends block_base {
 
         if ($status == 'STUD') {
             // SQL query if feedback was finished.
+
             $settingstimeopen = $DB->get_field_sql("SELECT value FROM {config_plugins} where plugin='block_evaluation' AND " .
             "name='settings_timeopen'");
 
@@ -145,7 +146,7 @@ WHERE u.id = ' . $userid . '
             $datasql = $DB->get_records_sql($sql);
 
             // Table.
-            $tablehtml = "<table class=\"table table-bordered\"><thead><tr><th>" .
+            $tablehtml = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "<th>" .
             get_string('tableheader_2', 'block_evaluation') . "<th>" .
             get_string('tableheader_3', 'block_evaluation') . "<th>" .
@@ -239,7 +240,7 @@ and u.suspended = 0
             $datasql = $DB->get_records_sql($sql);
 
             // Table.
-            $tablehtml = "<table class=\"table table-bordered\"><thead><tr><th>" .
+            $tablehtml = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "<th>" .
             get_string('tableheader_2', 'block_evaluation') . "<th>" .
             get_string('tableheader_3', 'block_evaluation') . "<th>Studenten insgesamt</th><th>" .
