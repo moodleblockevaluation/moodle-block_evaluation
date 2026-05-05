@@ -64,6 +64,7 @@ $string['evalBlock:addinstance'] = 'Eine Auflistung der Evaluationen als Block h
 
 $string['evalBlock:myaddinstance'] = 'Eine Auflistung der Evaluationen als Block auf meiner Moodle Seite hinzufuegen';
 
+$string['access_denied'] = 'Keine Berechtigung zur Ansicht';
 
 // Strings:table header.
 $string['tableheader_1'] = 'Modulname';
