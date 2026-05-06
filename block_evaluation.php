@@ -69,7 +69,7 @@ class block_evaluation extends block_base {
      */
     public function init() {
         global $CFG;
-        $this->title = get_string('evalBlock', 'block_evaluation');
+        $this->title = get_string('eval_block', 'block_evaluation');
     }
 
     #[\Override]

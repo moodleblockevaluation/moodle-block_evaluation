@@ -43,28 +43,28 @@
 // phpcs:disable moodle.Files.LangFilesOrdering.UnexpectedComment
 // phpcs:disable moodle.Files.LangFilesOrdering.IncorrectOrder
 
-$string['evalBlock'] = 'Auflistung der Evaluationen'; // Block header name.
-$string['pluginname'] = 'Evaluation Block'; // Name of your plugin.
-$string['privacy:metadata'] = 'The quiz archive plugin does not store any personal data about any user.';
-
+$string['eval_block'] = 'Auflistung der Evaluationen'; // Block header name.
+$string['plugin_name'] = 'Evaluation Block'; // Name of your plugin.
+$string['privacy_metadata'] = 'The quiz archive plugin does not store any personal data about any user.';
 
 // Strings:access.
-$string['FrSt_infotext'] = 'Infotext:';
-$string['FrSt_settings_namelike'] = 'Beinhaltet:';
-$string['FrSt_settings_timeclose'] = 'Ende:';
-$string['FrSt_settings_timeopen'] = 'Beginn:';
-$string['Help_infotext'] = 'Hier den Text eintragen, der oberhalb der Tabelle angezeigt werden soll.';
-$string['Help_settings_namelike'] = 'Der Name der Evaluation muss dies beinhalten.';
+$string['eval_block_addinstance'] = 'Eine Auflistung der Evaluationen als Block hinzufuegen';
+$string['eval_block_my_addinstance'] = 'Eine Auflistung der Evaluationen als Block auf meiner Moodle Seite hinzufuegen';
 
-$string['Help_settings_timeclose'] = 'Hier das Ende der Evaluation in dem Format YYYY-MM-DD angeben.';
+// Strings:settings.
+$string['help_settings_timeopen'] = 'Hier den Beginn der Evaluation in dem Format YYYY-MM-DD angeben.';
+$string['frst_settings_timeopen'] = 'Beginn:';
 
-$string['Help_settings_timeopen'] = 'Hier den Beginn der Evaluation in dem Format YYYY-MM-DD angeben.';
+$string['help_settings_timeclose'] = 'Hier das Ende der Evaluation in dem Format YYYY-MM-DD angeben.';
+$string['frst_settings_timeclose'] = 'Ende:';
 
-$string['evalBlock:addinstance'] = 'Eine Auflistung der Evaluationen als Block hinzufuegen';
+$string['help_settings_namelike'] = 'Der Name der Evaluation muss dies beinhalten.';
+$string['frst_settings_namelike'] = 'Beinhaltet:';
 
-$string['evalBlock:myaddinstance'] = 'Eine Auflistung der Evaluationen als Block auf meiner Moodle Seite hinzufuegen';
+$string['help_infotext'] = 'Hier den Text eintragen, der oberhalb der Tabelle angezeigt werden soll.';
+$string['frst_infotext'] = 'Infotext:';
 
-$string['access_denied'] = 'Keine Berechtigung zur Ansicht';
+$string['access_denied'] = 'Keine Berechtigung zur Ansicht.';
 
 // Strings:table header.
 $string['tableheader_1'] = 'Modulname';
