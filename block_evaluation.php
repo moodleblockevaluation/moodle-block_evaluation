@@ -153,13 +153,13 @@ class block_evaluation extends block_base {
         );
 
         // Arrays für getrennte Anzeige.
-        $traineroutput = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
+        $participantoutput = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "<th>" .
             get_string('tableheader_2', 'block_evaluation') . "<th>" .
             get_string('tableheader_3', 'block_evaluation') . "<th>" .
             get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
 
-        $participantoutput = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
+        $traineroutput = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "<th>" .
             get_string('tableheader_2', 'block_evaluation') . "<th>" .
             get_string('tableheader_3', 'block_evaluation') . "<th>Studenten insgesamt</th><th>" .
