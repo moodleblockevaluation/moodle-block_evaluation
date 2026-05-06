@@ -1,3 +1,10 @@
+[![Moodle Plugin CI](https://github.com/moodleblockevaluation/moodle-block_evaluation/actions/workflows/moodle-plugin-ci.yml/badge.svg)](https://github.com/moodleblockevaluation/moodle-block_evaluation/actions/workflows/moodle-plugin-ci.yml)
+[![Latest Release](https://img.shields.io/github/v/release/moodleblockevaluation/moodle-block_evaluation)](https://github.com/moodleblockevaluation/moodle-block_evaluation/releases)
+[![PHP Support](https://img.shields.io/badge/php-8.1--8.4-blue)](https://github.com/moodleblockevaluation/moodle-block_evaluation/actions)
+[![Moodle Support](https://img.shields.io/badge/Moodle-4.5--5.2+-orange)](https://github.com/moodleblockevaluation/moodle-block_evaluation/actions)
+[![License GPL-3.0](https://img.shields.io/github/license/moodleblockevaluation/moodle-block_evaluation?color=lightgrey)](https://github.com/moodleblockevaluation/moodle-block_evaluation/blob/main/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/moodleblockevaluation/moodle-block_evaluation)](https://github.com/moodleblockevaluation/moodle-block_evaluation/graphs/contributors)
+
 Projekt - Online-Lehrevaluatio Hochschule Neubrandenburg mittels Moodle Feedback und Zusatztools 
 
 Projektleitung: Dipl.-Inform. J. Schäfer 
