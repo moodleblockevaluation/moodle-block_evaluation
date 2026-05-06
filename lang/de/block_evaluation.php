@@ -45,7 +45,7 @@
 
 $string['eval_block'] = 'Auflistung der Evaluationen'; // Block header name.
 $string['plugin_name'] = 'Evaluation Block'; // Name of your plugin.
-$string['privacy_metadata'] = 'The quiz archive plugin does not store any personal data about any user.';
+$string['privacy_metadata'] = 'Im Evaluationsblock werden nur Daten angezeigt, die an anderen Speicherorten abgelegt sind.';
 
 // Strings:access.
 $string['eval_block_addinstance'] = 'Eine Auflistung der Evaluationen als Block hinzufuegen';
