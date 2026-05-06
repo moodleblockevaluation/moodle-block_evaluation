@@ -31,13 +31,13 @@ defined('MOODLE_INTERNAL') || die();
 if ($ADMIN->fulltree) {
     $settings->add(
         new admin_setting_configdate(
-           'block_evaluation/settings_timeopen',
+            'block_evaluation/settings_timeopen',
             get_string('frst_settings_timeopen', 'block_evaluation'),
             get_string('help_settings_timeopen', 'block_evaluation'),
             ['year' => 2000, 'mon' => 10, 'mday' => 1, 'hours' => 0, 'minutes' => 0]
         )
     );
-        
+
     $settings->add(
         new admin_setting_configdate(
             'block_evaluation/settings_timeclose',
@@ -63,6 +63,16 @@ if ($ADMIN->fulltree) {
             get_string('frst_infotext', 'block_evaluation'),
             get_string('help_infotext', 'block_evaluation'),
             '',
+            PARAM_TEXT,
+        )
+    );
+
+    $settings->add(
+        new admin_setting_configtext(
+            'block_evaluation/faqurl',
+            get_string('frst_faqurl', 'block_evaluation'),
+            get_string('help_faqurl', 'block_evaluation'),
+            'https://support.hs-nb.de/otrs/public.pl?Action=PublicFAQZoom;ItemID=78',
             PARAM_TEXT,
         )
     );

@@ -98,6 +98,7 @@ class block_evaluation extends block_base {
         $username = $USER->username;
 
         $settingsinfotext = get_config('block_evaluation', 'infotext');
+        $faqurl = get_config('block_evaluation', 'faqurl');
 
         // Role=student.
         if ($status == 'STUD') {
@@ -167,8 +168,7 @@ WHERE u.id = ' . $userid . '
             // Print content in block.
             $this->content->text = $settingsinfotext;
             $this->content->text .= $tablehtml;
-            $this->content->text .= "<a href='https://support.hs-nb.de/otrs/public.pl?Action=PublicFAQZoom;ItemID=78'" .
-                " target='_blank'>FAQ</a>";
+            $this->content->text .= get_string('faqurl', 'block_evaluation', $faqurl);
         } else if ($status == 'MA') {
             // SQL query of how many feedbacks are given in assigned courses for teachers.
 
@@ -251,8 +251,7 @@ and u.suspended = 0
             // Print content in block.
             $this->content->text = $settingsinfotext;
             $this->content->text .= $tablehtml;
-            $this->content->text .= "<a href='https://support.hs-nb.de/otrs/public.pl?Action=PublicFAQZoom;ItemID=78' " .
-                "target='_blank'>FAQ</a>";
+            $this->content->text .= get_string('faqurl', 'block_evaluation', $faqurl);
         } else {
             $tablehtml = "<table class=\"table table-bordered table-striped table-hover\"><thead></thead><tbody>";
             $tablehtml .= get_string('access_denied', 'block_evaluation');

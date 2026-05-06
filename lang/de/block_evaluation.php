@@ -65,6 +65,8 @@ $string['frst_infotext'] = 'Infotext:';
 
 $string['access_denied'] = 'Keine Berechtigung zur Ansicht.';
 
+$string['faqurl'] = '<a href="{$a}" target=\'_blank\'>FAQ</a>';
+
 // Strings:table header.
 $string['tableheader_1'] = 'Modulname';
 $string['tableheader_2'] = 'Alle Evaluationen';
