@@ -74,26 +74,15 @@ class block_evaluation extends block_base {
         $this->title = get_string('eval_block', 'block_evaluation');
     }
 
-    /**
-     * The has_config method.
-     *
-     * @return content
-     * @throws coding_exception
-     */
+    #[\Override]
     public function has_config() {
         return true;
     }
 
-    /**
-     * The get_content method.
-     *
-     * @return void
-     * @throws coding_exception
-     */
+    #[\Override]
     public function get_content() {
         global $DB;
         global $USER;
-        global $CFG;
         global $OUTPUT;
 
         if ($this->content !== null) {
@@ -246,13 +235,7 @@ class block_evaluation extends block_base {
         return $this->content;
     }
 
-    /**
-     * The applicable_formats method.
-     *
-     * @return array
-     * @throws coding_exception
-     *
-     */
+    #[\Override]
     public function applicable_formats() {
         return [
             'all' => true,
