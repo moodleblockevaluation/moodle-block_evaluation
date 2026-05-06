@@ -34,7 +34,7 @@ if ($ADMIN->fulltree) {
             'block_evaluation/settings_timeopen',
             get_string('frst_settings_timeopen', 'block_evaluation'),
             get_string('help_settings_timeopen', 'block_evaluation'),
-            ['year' => 2020, 'mon' => 10, 'mday' => 1, 'hours' => 0, 'minutes' => 0]
+            ['year' => 2020, 'mon' => 1, 'mday' => 1, 'hours' => 0, 'minutes' => 0]
         )
     );
 
@@ -43,7 +43,7 @@ if ($ADMIN->fulltree) {
             'block_evaluation/settings_timeclose',
             get_string('frst_settings_timeclose', 'block_evaluation'),
             get_string('help_settings_timeclose', 'block_evaluation'),
-            ['year' => 2030, 'mon' => 10, 'mday' => 1, 'hours' => 0, 'minutes' => 0]
+            ['year' => 2030, 'mon' => 1, 'mday' => 1, 'hours' => 0, 'minutes' => 0]
         )
     );
 
