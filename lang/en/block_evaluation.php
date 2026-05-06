@@ -40,28 +40,28 @@
 // phpcs:disable moodle.Files.LangFilesOrdering.UnexpectedComment
 // phpcs:disable moodle.Files.LangFilesOrdering.IncorrectOrder
 
-$string['evalBlock'] = 'Overview of evaluations'; // Block header name.
-$string['pluginname'] = 'Evaluation block'; // Name of your plugin.
-$string['privacy:metadata'] = 'The Evaluation block only shows data stored in other locations.';
+$string['eval_block'] = 'Overview of evaluations'; // Block header name.
+$string['plugin_name'] = 'Evaluation block'; // Name of your plugin.
+$string['privacy_metadata'] = 'The Evaluation block only shows data stored in other locations.';
 
 // Strings:access.
-$string['evalBlock:addinstance'] = 'Add a evaluation block';
-$string['evalBlock:myaddinstance'] = 'Add a evaluation block to my Moodle page';
+$string['eval_block_addinstance'] = 'Add a evaluation block';
+$string['eval_block_my_addinstance'] = 'Add a evaluation block to my Moodle page';
 
 // Strings:settings.
-$string['Help_settings_timeopen'] = 'Enter the start of the evaluation here in the format YYYY-MM-DD.';
-$string['FrSt_settings_timeopen'] = 'Start:';
+$string['help_settings_timeopen'] = 'Enter the start of the evaluation here in the format YYYY-MM-DD.';
+$string['frst_settings_timeopen'] = 'Start:';
 
-$string['Help_settings_timeclose'] = 'Enter the end of the evaluation here in the format YYYY-MM-DD.';
-$string['FrSt_settings_timeclose'] = 'End:';
+$string['help_settings_timeclose'] = 'Enter the end of the evaluation here in the format YYYY-MM-DD.';
+$string['frst_settings_timeclose'] = 'End:';
 
-$string['Help_settings_namelike'] = 'The name of the evaluation must include this.';
-$string['FrSt_settings_namelike'] = 'Contains:';
+$string['help_settings_namelike'] = 'The name of the evaluation must include this.';
+$string['frst_settings_namelike'] = 'Contains:';
 
-$string['Help_infotext'] = 'Enter the text to be displayed above the table here.';
-$string['FrSt_infotext'] = 'Infotext:';
+$string['help_infotext'] = 'Enter the text to be displayed above the table here.';
+$string['frst_infotext'] = 'Infotext:';
 
-$string['access_denied'] = 'No permission to view';
+$string['access_denied'] = 'No permission to view.';
 
 // Strings:table header.
 $string['tableheader_1'] = 'Module name';
