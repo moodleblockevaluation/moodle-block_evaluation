@@ -169,6 +169,7 @@ class block_evaluation extends block_base {
             $context = context_course::instance($rec->courseid);
             $url = new moodle_url('/mod/feedback/view.php', ['id' => $rec->cmid]);
             $link = html_writer::link($url, format_string($rec->feedbackname));
+            $icon = 't/completion_fail';
             // TRAINER.
             if (has_capability('mod/feedback:viewreports', $context)) {
                 // Anzahl Kursraumteilnehmer/innen ermitteln.
@@ -185,13 +186,23 @@ class block_evaluation extends block_base {
                 // User enrolled in course?
                 if (is_enrolled($context, $USER, '', true)) {
                     if (!empty($rec->completedid)) {
-                        $status = html_writer::span(get_string('completed', 'block_evaluation'), 'text-success');
+                        $status = get_string('completed', 'block_evaluation');
+                        $icon = 't/check';
+                        $iconclass = 'text-success';
                     } else {
-                        $status = html_writer::span(get_string('open', 'block_evaluation'), 'text-warning');
+                        $status = get_string('open', 'block_evaluation');
+                        $icon = 't/completion_fail';
+                        $iconclass = 'text-danger';
                     }
                     $participantoutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
-                    $rec->feedbackname . "</td><td>" . $rec->timeclose . "</td><td>" . $status .
-                    "</td><tr>";
+                    $rec->feedbackname . "</td><td>" . $rec->timeclose . "</td><td>" .
+                    $OUTPUT->action_icon(
+                        'https://www.moodle.org',
+                        new \pix_icon($icon, $status, '', ['class' => 'iconsmall ' . $iconclass]),
+                        null,
+                        ['title' => $status, 'class' => '']
+                    )
+                    . "</td><tr>";
                 }
             }
         }

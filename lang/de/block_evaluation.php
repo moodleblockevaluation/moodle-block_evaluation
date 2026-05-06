@@ -72,6 +72,9 @@ $string['faqurl'] = '<a href="{$a}" target=\'_blank\'>FAQ</a>';
 $string['frst_faqurl'] = 'FAQ URL:';
 $string['help_faqurl'] = 'URL zur Hilfe/FAQ vom Evaluations Block.';
 
+$string['open'] = 'offen';
+$string['completed'] = 'ausgefüllt';
+
 // Strings:table header.
 $string['tableheader_1'] = 'Modulname';
 $string['tableheader_2'] = 'Alle Evaluationen';

@@ -58,10 +58,10 @@ Feature: The evaluation block allow you to see what evaluation there are
     And I follow "Dashboard"
     Then I should see "Lehrevaluation Dozent/in: teacher1" in the ".block_evaluation" "css_element"
     And I should see "Lehrevaluation Dozent/in: teacher2" in the ".block_evaluation" "css_element"
-    And "a[target='_blank'][href='http://www.moodle.org']" "css_element" should exist
+    And "a[target='_blank'][href='https://www.moodle.org']" "css_element" should exist
     And I log out
     And I log in as "teacher1"
     And I follow "Dashboard"
     And I should see "Lehrevaluation Dozent/in: teacher1" in the ".block_evaluation" "css_element"
-    And "a[target='_blank'][href='http://www.moodle.org']" "css_element" should exist
+    And "a[target='_blank'][href='https://www.moodle.org']" "css_element" should exist
     But I should not see "Lehrevaluation Dozent/in: teacher2" in the ".block_evaluation" "css_element"
