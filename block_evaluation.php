@@ -72,12 +72,22 @@ class block_evaluation extends block_base {
         $this->title = get_string('eval_block', 'block_evaluation');
     }
 
-    #[\Override]
+    /**
+     * The has_config method.
+     *
+     * @return content
+     * @throws coding_exception
+     */
     public function has_config() {
         return true;
     }
 
-    #[\Override]
+    /**
+     * The get_content method.
+     *
+     * @return void
+     * @throws coding_exception
+     */
     public function get_content() {
         global $DB;
         global $USER;
@@ -89,176 +99,134 @@ class block_evaluation extends block_base {
         }
 
         $this->content = new stdClass();
+        $output = '';
 
-        $userid = $USER->id;
-
-        // Determine user status for display  STUD => Students; MA => Faculty.
-        $status = $DB->get_field_sql("SELECT institution FROM {user} where id = '" . $userid . "'");
-
-        $username = $USER->username;
-
+        // Reading Block Settings.
         $settingsinfotext = get_config('block_evaluation', 'infotext');
+        $settingstimeopen = get_config('block_evaluation', 'settings_timeopen');
+        $settingstimeclose = get_config('block_evaluation', 'settings_timeclose');
+        $settingsnamelike = "%" . get_config('block_evaluation', 'settings_namelike') . "%";
         $faqurl = get_config('block_evaluation', 'faqurl');
 
-        // Role=student.
-        if ($status == 'STUD') {
-            // Reading Block Settings.
-            $settingstimeopen = get_config('block_evaluation', 'settings_timeopen');
-            $settingstimeclose = get_config('block_evaluation', 'settings_timeclose');
-            $settingsnamelike = get_config('block_evaluation', 'settings_namelike');
+        if (is_siteadmin()) {
+            $output .= get_string('access_denied', 'block_evaluation');
+            $this->content->text = $output;
+            return $this->content;
+        }
 
-            $sql = 'SELECT f.id fid, m.id mid, f.course feedbackcourse, from_unixtime(timeopen) begin, ' .
-            'From_unixtime(timeclose) end, f.name feedbackname, c.fullname coursename, k.path coursecategories
+        // 1. ALLE FEEDBACKS LADEN (zentral)
+        // Nur im Evaluationszeitraum lt. config und Name: Lehrevaluation beinhaltet
+        $sql = "
+            SELECT f.id AS feedbackid,
+                   f.name AS feedbackname,
+                   c.id AS courseid,
+                   c.fullname AS coursename,
+                   cm.id AS cmid,
+                   f.timeopen,
+                   f.timeclose,
 
-        ,(SELECT count(*) from {feedback_completed} WHERE userid = ' . $userid . ' and feedback=f.id) AS ausgefuellt
+                   -- Status (für Teilnehmer)
+                   fc.id AS completedid,
 
-        FROM {feedback} f, {course} c, {course_categories} k, {course_modules} m, {modules} m2
-        WHERE (timeopen >=UNIX_TIMESTAMP("' . $settingstimeopen . '") OR timeopen = \'0\')
-        AND (timeclose <=UNIX_TIMESTAMP("' . $settingstimeclose . '") OR timeclose = \'0\')
-        AND f.course = c.id
-        AND c.category = k.id
-        AND m2.name = \'feedback\'
-        AND m.module = m2.id
-        AND m.visible != 0
-        AND m.course = f.course
-        AND m.instance = f.id
-        AND f.name like \'%' . $settingsnamelike . '%\'
+                   -- Anzahl Antworten
+                   (
+                       SELECT COUNT(fc2.id)
+                       FROM {feedback_completed} fc2
+                       WHERE fc2.feedback = f.id
+                   ) AS responsecount
 
-AND c.id in (SELECT ic.id
-FROM {course}           ic
-JOIN {context}          con ON con.instanceid = ic.id
-JOIN {role_assignments} ra  ON ra.contextid   = con.id    AND con.contextlevel = 50
-JOIN {role}             r   ON ra.roleid      = r.id
-JOIN {user}             u   ON u.id           = ra.userid
-WHERE u.id = ' . $userid . '
-  AND ic.id = ic.id
-  AND ra.roleid = 5)
+            FROM {feedback} f
+            JOIN {course} c ON c.id = f.course
+            JOIN {modules} m ON m.name = 'feedback'
+            JOIN {course_modules} cm ON cm.instance = f.id AND cm.module = m.id
+            LEFT JOIN {feedback_completed} fc ON fc.feedback = f.id AND fc.userid = :userid
+            WHERE f.timeopen >= :fopen and f.timeclose <= :fclose and f.name like :fname
+            ORDER BY c.fullname, f.name
+        ";
 
-        ORDER BY c.fullname, f.name';
+        $records = $DB->get_records_sql(
+            $sql,
+            ['userid' => $USER->id,
+            'fopen' => $settingstimeopen,
+            'fclose' => $settingstimeclose,
+            'fname' => $settingsnamelike]
+        );
 
-            $datasql = $DB->get_records_sql($sql);
-
-            // Table.
-            $tablehtml = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
+        // Arrays für getrennte Anzeige.
+        $traineroutput = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "<th>" .
             get_string('tableheader_2', 'block_evaluation') . "<th>" .
             get_string('tableheader_3', 'block_evaluation') . "<th>" .
             get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
-            foreach ($datasql as $e) {
-                $dateformat = DateTime::createFromFormat('Y-m-d H:i:s', $e->end)->format('d.m.y H:i');
-                $feedbackurl = new moodle_url("/mod/feedback/view.php?id=" . $e->mid . "");
-                $dataarr = [
-                    $e->coursename,
-                    "<a href = $feedbackurl target = _blank>$e->feedbackname</a>",
-                    $dateformat,
-                    $e->ausgefuellt,
-                ];
-                if ($dataarr[3] == 0) {
-                    $tablehtml .= "<tr><td>$dataarr[0]<td>$dataarr[1]<td>$dataarr[2]" .
-                        "<td align=\"center\"><img src=\"" . $CFG->wwwroot .
-                        "/blocks/evaluation/pix/kreuz.png\" width=15></td></tr>";
-                } else {
-                    $tablehtml .= "<tr><td>$dataarr[0]<td>$dataarr[1]<td>$dataarr[2]" .
-                        "<td align=\"center\"><img src=\"" . $CFG->wwwroot .
-                        "/blocks/evaluation/pix/haken.png\" width=15></td></tr>";
-                }
-            };
-            $tablehtml .= "</tbody></table></html>";
 
-            // Print content in block.
-            $this->content->text = $settingsinfotext;
-            $this->content->text .= $tablehtml;
-            $this->content->text .= get_string('faqurl', 'block_evaluation', $faqurl);
-        } else if ($status == 'MA') {
-            // SQL query of how many feedbacks are given in assigned courses for teachers.
-
-            // Reading Block Settings.
-            $settingstimeopen = get_config('block_evaluation', 'settings_timeopen');
-            $settingstimeclose = get_config('block_evaluation', 'settings_timeclose');
-            $settingsnamelike = get_config('block_evaluation', 'settings_namelike');
-
-            $sql = 'SELECT f.id fid, m.id mid, f.course feedbackcourse, from_unixtime(timeopen) begin, ' .
-                'From_unixtime(timeclose) end, f.name feedbackname, c.fullname coursename, k.path coursecategories
-
-        ,(SELECT count(distinct(ra.userid)) Users FROM {role_assignments} ra
-JOIN {context} ctx ON ra.contextid = ctx.id
-JOIN {user_enrolments} ue on ue.userid = ra.userid
-JOIN {enrol} e ON e.id = ue.enrolid
-JOIN {user} u ON u.id = ue.userid
-WHERE ra.roleid = 5 AND ctx.instanceid = c.id AND e.courseid = c.id
-and ue.status = 0
-and (ue.timeend = 0 or ue.timeend >= unix_timestamp())
-and u.suspended = 0
-        ) AS studentssum,
-
-        (SELECT COUNT(*)
-
-        FROM {feedback_completed} mfc
-
-        WHERE mfc.feedback = f.id
-
-        GROUP BY feedback) AS feedbacksum
-
-        FROM {feedback} f, {course} c, {course_categories} k, {course_modules} m, {modules} m2
-
-        WHERE (timeopen >=UNIX_TIMESTAMP("' . $settingstimeopen . '") OR timeopen = \'0\')
-
-        AND (timeclose <=UNIX_TIMESTAMP("' . $settingstimeclose . '") OR timeclose = \'0\')
-
-        AND f.course = c.id
-
-        AND c.category = k.id
-
-        AND m2.name = \'feedback\'
-
-        AND m.module = m2.id
-
-        AND m.course = f.course
-
-        AND m.instance = f.id
-
-        AND f.name like \'%' . $settingsnamelike . '%\'
-
-    AND f.name like \'%' . $username . '%\'
-
-        AND c.id IN (SELECT e.courseid FROM {user_enrolments} ue join {enrol} e ON e.id = ue.enrolid join {course} c on' .
-            ' c.id = e.courseid where userid = ' . $userid . ')
-
-        ORDER BY c.fullname, f.name';
-
-            $datasql = $DB->get_records_sql($sql);
-
-            // Table.
-            $tablehtml = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
+        $participantoutput = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "<th>" .
             get_string('tableheader_2', 'block_evaluation') . "<th>" .
             get_string('tableheader_3', 'block_evaluation') . "<th>Studenten insgesamt</th><th>" .
             get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
-            foreach ($datasql as $e) {
-                $dateformat = DateTime::createFromFormat('Y-m-d H:i:s', $e->end)->format('d.m.y H:i');
-                $feedbackurl  = new moodle_url("/mod/feedback/view.php?id=" . $e->mid . "");
-                $dataarr = [
-                    $e->coursename,
-                    "<a href = $feedbackurl target = _blank>$e->feedbackname</a>",
-                    $dateformat,
-                    $e->studentssum,
-                    $e->feedbacksum,
-                ];
-                $tablehtml .= "<tr><td>$dataarr[0]<td>$dataarr[1]<td>$dataarr[2]<td>$dataarr[3]<td>$dataarr[4]</td></tr>";
-            };
-            $tablehtml .= "</tbody></table></html>";
 
-            // Print content in block.
-            $this->content->text = $settingsinfotext;
-            $this->content->text .= $tablehtml;
-            $this->content->text .= get_string('faqurl', 'block_evaluation', $faqurl);
-        } else {
-            $tablehtml = "<table class=\"table table-bordered table-striped table-hover\"><thead></thead><tbody>";
-            $tablehtml .= get_string('access_denied', 'block_evaluation');
-            $tablehtml .= "</tbody></table></html>";
-            $this->content->text = $tablehtml;
+        foreach ($records as $rec) {
+            $context = context_course::instance($rec->courseid);
+            $url = new moodle_url('/mod/feedback/view.php', ['id' => $rec->cmid]);
+            $link = html_writer::link($url, format_string($rec->feedbackname));
+            // TRAINER.
+            if (has_capability('mod/feedback:viewreports', $context)) {
+                // Anzahl Kursraumteilnehmer/innen ermitteln.
+                $participants = count_enrolled_users($context, 'mod/feedback:complete', 0, true);
+                // Trainer nur eigene anzeigen.
+                if (str_contains($rec->feedbackname, $USER->username)) {
+                    $traineroutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
+                    $rec->feedbackname . "</td><td>" . $rec->timeclose . "</td><td>" . $participants .
+                    "</td><td>" . $rec->responsecount . "</td></tr>";
+                }
+            }
+            // TEILNEHMER.
+            if (has_capability('mod/feedback:complete', $context)) {
+                // User enrolled in course?
+                if (is_enrolled($context, $USER, '', true)) {
+                    if (!empty($rec->completedid)) {
+                        $status = html_writer::span(get_string('completed', 'block_evaluation'), 'text-success');
+                    } else {
+                        $status = html_writer::span(get_string('open', 'block_evaluation'), 'text-warning');
+                    }
+                    $participantoutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
+                    $rec->feedbackname . "</td><td>" . $rec->timeclose . "</td><td>" . $status .
+                    "</td><tr>";
+                }
+            }
         }
 
+        // AUSGABE-Ende Dozent.
+        if ($traineroutput) {
+            $output .= html_writer::tag('h4', get_string('astrainer', 'block_evaluation'));
+            $output .= $traineroutput;
+            $output .= "</tbody></table>";
+        }
+        // Ausgabe-Ende Student.
+        if ($participantoutput) {
+            $output .= html_writer::tag('h4', get_string('asparticipant', 'block_evaluation'));
+            $output .= $participantoutput;
+            $output .= "</tbody></table>";
+        }
+
+        if (!$traineroutput && !$participantoutput) {
+            $output .= get_string('nofeedbacks', 'block_evaluation');
+        }
+        $output .= get_string('faqurl', 'block_evaluation', $faqurl);
+        $this->content->text = $output;
         return $this->content;
+    }
+
+    /**
+     * The applicable_formats method.
+     *
+     * @return array
+     * @throws coding_exception
+     *
+     */
+    public function applicable_formats() {
+        return [
+            'all' => true,
+        ];
     }
 }
