@@ -63,6 +63,9 @@ $string['frst_settings_namelike'] = 'Beinhaltet:';
 $string['help_infotext'] = 'Hier den Text eintragen, der oberhalb der Tabelle angezeigt werden soll.';
 $string['frst_infotext'] = 'Infotext:';
 
+$string['trainer'] = 'Trainer/in';
+$string['participant'] = 'Teilnehmer/in';
+
 $string['access_denied'] = 'Keine Berechtigung zur Ansicht.';
 
 $string['faqurl'] = '<a href="{$a}" target=\'_blank\'>FAQ</a>';
