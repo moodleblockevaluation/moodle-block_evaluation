@@ -249,7 +249,7 @@ and u.suspended = 0
             $tablehtml .= "</tbody></table></html>";
 
             // Print content in block.
-            $this->context->text = $settingsinfotext;
+            $this->content->text = $settingsinfotext;
             $this->content->text .= $tablehtml;
             $this->content->text .= "<a href='https://support.hs-nb.de/otrs/public.pl?Action=PublicFAQZoom;ItemID=78' " .
                 "target='_blank'>FAQ</a>";
