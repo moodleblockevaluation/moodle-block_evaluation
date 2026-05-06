@@ -22,45 +22,48 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+require_once(__DIR__ . '/classes/local/admin_settings_configdate.php');
+
+use block_evaluation\local\admin_setting_configdate;
+
 defined('MOODLE_INTERNAL') || die();
 
+if ($ADMIN->fulltree) {
+    $settings->add(
+        new admin_setting_configdate(
+           'block_evaluation/settings_timeopen',
+            get_string('frst_settings_timeopen', 'block_evaluation'),
+            get_string('help_settings_timeopen', 'block_evaluation'),
+            ['year' => 2000, 'mon' => 10, 'mday' => 1, 'hours' => 0, 'minutes' => 0]
+        )
+    );
+        
+    $settings->add(
+        new admin_setting_configdate(
+            'block_evaluation/settings_timeclose',
+            get_string('frst_settings_timeclose', 'block_evaluation'),
+            get_string('help_settings_timeclose', 'block_evaluation'),
+            ['year' => 2030, 'mon' => 10, 'mday' => 1, 'hours' => 0, 'minutes' => 0]
+        )
+    );
 
-$settings->add(
-    new admin_setting_configtext(
-        'block_evaluation/settings_timeopen',
-        get_string('frst_settings_timeopen', 'block_evaluation'),
-        get_string('help_settings_timeopen', 'block_evaluation'),
-        '2000-01-01',
-        PARAM_TEXT,
-    )
-);
+    $settings->add(
+        new admin_setting_configtext(
+            'block_evaluation/settings_namelike',
+            get_string('frst_settings_namelike', 'block_evaluation'),
+            get_string('help_settings_namelike', 'block_evaluation'),
+            'evaluation',
+            PARAM_TEXT,
+        )
+    );
 
-$settings->add(
-    new admin_setting_configtext(
-        'block_evaluation/settings_timeclose',
-        get_string('frst_settings_timeclose', 'block_evaluation'),
-        get_string('help_settings_timeclose', 'block_evaluation'),
-        '2030-01-01',
-        PARAM_TEXT,
-    )
-);
-
-$settings->add(
-    new admin_setting_configtext(
-        'block_evaluation/settings_namelike',
-        get_string('frst_settings_namelike', 'block_evaluation'),
-        get_string('help_settings_namelike', 'block_evaluation'),
-        'evaluation',
-        PARAM_TEXT,
-    )
-);
-
-$settings->add(
-    new admin_setting_configtext(
-        'block_evaluation/infotext',
-        get_string('frst_infotext', 'block_evaluation'),
-        get_string('help_infotext', 'block_evaluation'),
-        '',
-        PARAM_TEXT,
-    )
-);
+    $settings->add(
+        new admin_setting_configtext(
+            'block_evaluation/infotext',
+            get_string('frst_infotext', 'block_evaluation'),
+            get_string('help_infotext', 'block_evaluation'),
+            '',
+            PARAM_TEXT,
+        )
+    );
+}

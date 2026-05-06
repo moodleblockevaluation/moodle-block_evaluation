@@ -51,11 +51,10 @@ $string['privacy_metadata'] = 'Im Evaluationsblock werden nur Daten angezeigt, d
 $string['eval_block_addinstance'] = 'Eine Auflistung der Evaluationen als Block hinzufuegen';
 $string['eval_block_my_addinstance'] = 'Eine Auflistung der Evaluationen als Block auf meiner Moodle Seite hinzufuegen';
 
-// Strings:settings.
-$string['help_settings_timeopen'] = 'Hier den Beginn der Evaluation in dem Format YYYY-MM-DD angeben.';
+$string['help_settings_timeopen'] = 'Hier den Beginn der Evaluation angeben.';
 $string['frst_settings_timeopen'] = 'Beginn:';
 
-$string['help_settings_timeclose'] = 'Hier das Ende der Evaluation in dem Format YYYY-MM-DD angeben.';
+$string['help_settings_timeclose'] = 'Hier das Ende der Evaluation angeben.';
 $string['frst_settings_timeclose'] = 'Ende:';
 
 $string['help_settings_namelike'] = 'Der Name der Evaluation muss dies beinhalten.';
