@@ -191,7 +191,7 @@ class block_evaluation extends block_base {
                 if (str_contains($rec->feedbackname, $USER->username)) {
                     $showteacheroutput = true;
                     $teacheroutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
-                    $link . "</td><td>" . $rec->timeclose . "</td><td>" . $participants .
+                    $link . "</td><td>" . userdate($rec->timeclose) . "</td><td>" . $participants .
                     "</td><td>" . $rec->responsecount . "</td></tr>";
                 }
             }
@@ -210,7 +210,7 @@ class block_evaluation extends block_base {
                         $iconclass = 'text-danger';
                     }
                     $studentoutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
-                    $link . "</td><td>" . $rec->timeclose . "</td><td>" .
+                    $link . "</td><td>" . userdate($rec->timeclose) . "</td><td>" .
                     $OUTPUT->action_icon(
                         $url,
                         new \pix_icon($icon, $status, '', ['class' => 'iconsmall ' . $iconclass]),
