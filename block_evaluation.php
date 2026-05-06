@@ -254,7 +254,10 @@ and u.suspended = 0
             $this->content->text .= "<a href='https://support.hs-nb.de/otrs/public.pl?Action=PublicFAQZoom;ItemID=78' " .
                 "target='_blank'>FAQ</a>";
         } else {
-            echo get_string('access_denied', 'block_evaluation');
+            $tablehtml = "<table class=\"table table-bordered table-striped table-hover\"><thead></thead><tbody>";
+            $tablehtml .= get_string('access_denied', 'block_evaluation');
+            $tablehtml .= "</tbody></table></html>";
+            $this->content->text .= $tablehtml;
         }
 
         return $this->content;
