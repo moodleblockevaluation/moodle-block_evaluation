@@ -66,4 +66,14 @@ if ($ADMIN->fulltree) {
             PARAM_TEXT,
         )
     );
+
+    $settings->add(
+        new admin_setting_configtext(
+            'block_evaluation/faqurl',
+            get_string('frst_faqurl', 'block_evaluation'),
+            get_string('help_faqurl', 'block_evaluation'),
+            'https://support.hs-nb.de/otrs/public.pl?Action=PublicFAQZoom;ItemID=78',
+            PARAM_TEXT,
+        )
+    );
 }

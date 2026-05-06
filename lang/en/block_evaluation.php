@@ -63,6 +63,7 @@ $string['frst_infotext'] = 'Infotext:';
 
 $string['access_denied'] = 'No permission to view.';
 
+$string['faqurl'] = '<a href="{$a}" target=\'_blank\'>FAQ</a>';
 $string['frst_faqurl'] = 'FAQ URL:';
 $string['help_faqurl'] = 'URL to support/FAQ from evaluation block.';
 
