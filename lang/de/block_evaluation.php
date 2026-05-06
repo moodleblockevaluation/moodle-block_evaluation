@@ -44,7 +44,7 @@
 // phpcs:disable moodle.Files.LangFilesOrdering.IncorrectOrder
 
 $string['eval_block'] = 'Auflistung der Evaluationen'; // Block header name.
-$string['plugin_name'] = 'Evaluation Block'; // Name of your plugin.
+$string['pluginname'] = 'Evaluation Block'; // Name of your plugin.
 $string['privacy_metadata'] = 'Im Evaluationsblock werden nur Daten angezeigt, die an anderen Speicherorten abgelegt sind.';
 
 // Strings:access.
