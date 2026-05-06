@@ -65,6 +65,8 @@ $string['frst_infotext'] = 'Infotext:';
 
 $string['trainer'] = 'Trainer/in';
 $string['participant'] = 'Teilnehmer/in';
+$string['totalparticipants'] = 'Teilnehmer/innen insgesamt';
+$string['nofeedbacks'] = 'Keine Feedbacks';
 
 $string['access_denied'] = 'Keine Berechtigung zur Ansicht.';
 
