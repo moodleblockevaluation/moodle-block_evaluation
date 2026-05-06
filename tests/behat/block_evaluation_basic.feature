@@ -14,14 +14,12 @@ Feature: The evaluation block allow you to see what evaluation there are
       | teacher2 | Teacher   | 1        | teacher2@example.com | MA          |
       | student1 | Student   | 1        | student1@example.com | STUD        |
       | student2 | Student   | 2        | student2@example.com | STUD        |
-
     And the following "course enrolments" exist:
       | user     | course | role           |
       | teacher1 | C1     | editingteacher |
       | student1 | C1     | student        |
       | teacher2 | C1     | editingteacher |
       | student2 | C1     | student        |
-
     And the following "activities" exist:
       | activity   | name                               | course | idnumber  | timeopen      | timeclose    |
       | feedback   | Lehrevaluation Dozent/in: teacher1 | C1     | feedback0 | ##yesterday## | ##tomorrow## |
@@ -30,6 +28,19 @@ Feature: The evaluation block allow you to see what evaluation there are
   @javascript
   Scenario: Add the evaluation block to user default dashboard
     Given I log in as "admin"
+    And I navigate to "Plugins > Blocks > Evaluation block" in site administration
+    And I set the following fields to these values:
+      | menus_block_evaluation_settings_timeopenmday     | 1    |
+      | menus_block_evaluation_settings_timeopenmon      | 1    |
+      | menus_block_evaluation_settings_timeopenyear     | 2020 |
+      | menus_block_evaluation_settings_timeopenhours    | 0    |
+      | menus_block_evaluation_settings_timeopenminutes  | 0    |
+      | menus_block_evaluation_settings_timeclosemday    | 1    |
+      | menus_block_evaluation_settings_timeclosemon     | 1    |
+      | menus_block_evaluation_settings_timecloseyear    | 2030 |
+      | menus_block_evaluation_settings_timeclosehours   | 0    |
+      | menus_block_evaluation_settings_timecloseminutes | 0    |
+    And I press "Save changes"
     And I navigate to "Appearance > Default Dashboard page" in site administration
     And I turn editing mode on
     And I add the "Evaluation block" block

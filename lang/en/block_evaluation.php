@@ -41,7 +41,7 @@
 // phpcs:disable moodle.Files.LangFilesOrdering.IncorrectOrder
 
 $string['eval_block'] = 'Overview of evaluations'; // Block header name.
-$string['plugin_name'] = 'Evaluation block'; // Name of your plugin.
+$string['pluginname'] = 'Evaluation block'; // Name of your plugin.
 $string['privacy_metadata'] = 'The Evaluation block only shows data stored in other locations.';
 
 // Strings:access.
@@ -64,6 +64,8 @@ $string['frst_infotext'] = 'Infotext:';
 $string['access_denied'] = 'No permission to view.';
 
 $string['faqurl'] = '<a href="{$a}" target=\'_blank\'>FAQ</a>';
+$string['frst_faqurl'] = 'FAQ URL:';
+$string['help_faqurl'] = 'URL to support/FAQ from evaluation block.';
 
 // Strings:table header.
 $string['tableheader_1'] = 'Module name';

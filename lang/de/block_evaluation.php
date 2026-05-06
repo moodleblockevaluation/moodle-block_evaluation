@@ -44,7 +44,7 @@
 // phpcs:disable moodle.Files.LangFilesOrdering.IncorrectOrder
 
 $string['eval_block'] = 'Auflistung der Evaluationen'; // Block header name.
-$string['plugin_name'] = 'Evaluation Block'; // Name of your plugin.
+$string['pluginname'] = 'Evaluation Block'; // Name of your plugin.
 $string['privacy_metadata'] = 'Im Evaluationsblock werden nur Daten angezeigt, die an anderen Speicherorten abgelegt sind.';
 
 // Strings:access.
@@ -66,6 +66,8 @@ $string['frst_infotext'] = 'Infotext:';
 $string['access_denied'] = 'Keine Berechtigung zur Ansicht.';
 
 $string['faqurl'] = '<a href="{$a}" target=\'_blank\'>FAQ</a>';
+$string['frst_faqurl'] = 'FAQ URL:';
+$string['help_faqurl'] = 'URL zur Hilfe/FAQ vom Evaluations Block.';
 
 // Strings:table header.
 $string['tableheader_1'] = 'Modulname';
