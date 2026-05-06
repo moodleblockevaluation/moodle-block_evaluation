@@ -30,16 +30,17 @@ Feature: The evaluation block allow you to see what evaluation there are
     Given I log in as "admin"
     And I navigate to "Plugins > Blocks > Evaluation block" in site administration
     And I set the following fields to these values:
-      | menus_block_evaluation_settings_timeopenmday     | 1    |
-      | menus_block_evaluation_settings_timeopenmon      | 1    |
-      | menus_block_evaluation_settings_timeopenyear     | 2020 |
-      | menus_block_evaluation_settings_timeopenhours    | 0    |
-      | menus_block_evaluation_settings_timeopenminutes  | 0    |
-      | menus_block_evaluation_settings_timeclosemday    | 1    |
-      | menus_block_evaluation_settings_timeclosemon     | 1    |
-      | menus_block_evaluation_settings_timecloseyear    | 2030 |
-      | menus_block_evaluation_settings_timeclosehours   | 0    |
-      | menus_block_evaluation_settings_timecloseminutes | 0    |
+      | menus_block_evaluation_settings_timeopenmday     | 1                      |
+      | menus_block_evaluation_settings_timeopenmon      | 1                      |
+      | menus_block_evaluation_settings_timeopenyear     | 2020                   |
+      | menus_block_evaluation_settings_timeopenhours    | 0                      |
+      | menus_block_evaluation_settings_timeopenminutes  | 0                      |
+      | menus_block_evaluation_settings_timeclosemday    | 1                      |
+      | menus_block_evaluation_settings_timeclosemon     | 1                      |
+      | menus_block_evaluation_settings_timecloseyear    | 2030                   |
+      | menus_block_evaluation_settings_timeclosehours   | 0                      |
+      | menus_block_evaluation_settings_timecloseminutes | 0                      |
+      | s_block_evaluation_faqurl                        | https://www.moodle.org |
     And I press "Save changes"
     And I navigate to "Appearance > Default Dashboard page" in site administration
     And I turn editing mode on
@@ -57,8 +58,10 @@ Feature: The evaluation block allow you to see what evaluation there are
     And I follow "Dashboard"
     Then I should see "Lehrevaluation Dozent/in: teacher1" in the ".block_evaluation" "css_element"
     And I should see "Lehrevaluation Dozent/in: teacher2" in the ".block_evaluation" "css_element"
+    And "a[target='_blank'][href='http://www.moodle.org']" "css_element" should exist
     And I log out
     And I log in as "teacher1"
     And I follow "Dashboard"
     And I should see "Lehrevaluation Dozent/in: teacher1" in the ".block_evaluation" "css_element"
+    And "a[target='_blank'][href='http://www.moodle.org']" "css_element" should exist
     But I should not see "Lehrevaluation Dozent/in: teacher2" in the ".block_evaluation" "css_element"

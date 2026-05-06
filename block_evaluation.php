@@ -256,7 +256,7 @@ and u.suspended = 0
             $tablehtml = "<table class=\"table table-bordered table-striped table-hover\"><thead></thead><tbody>";
             $tablehtml .= get_string('access_denied', 'block_evaluation');
             $tablehtml .= "</tbody></table></html>";
-            $this->content->text .= $tablehtml;
+            $this->content->text = $tablehtml;
         }
 
         return $this->content;
