@@ -49,10 +49,10 @@ $string['eval_block_addinstance'] = 'Add a evaluation block';
 $string['eval_block_my_addinstance'] = 'Add a evaluation block to my Moodle page';
 
 // Strings:settings.
-$string['help_settings_timeopen'] = 'Enter the start of the evaluation here in the format YYYY-MM-DD.';
+$string['help_settings_timeopen'] = 'Enter the start of the evaluation here.';
 $string['frst_settings_timeopen'] = 'Start:';
 
-$string['help_settings_timeclose'] = 'Enter the end of the evaluation here in the format YYYY-MM-DD.';
+$string['help_settings_timeclose'] = 'Enter the end of the evaluation here.';
 $string['frst_settings_timeclose'] = 'End:';
 
 $string['help_settings_namelike'] = 'The name of the evaluation must include this.';

@@ -54,7 +54,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2024012501;  // YYYYMMDDHH (Year Month Day 24-hr time).
+$plugin->version = 2026050603;  // YYYYMMDDHH (Year Month Day 24-hr time).
 $plugin->requires = 2022041200; // YYYYMMDDHH (The release version of Moodle 4.1).
 $plugin->component = 'block_evaluation'; // Name of your plugin (used for diagnostics).
 $plugin->supported = [405, 502]; // Moodle branches lowest and highest.
