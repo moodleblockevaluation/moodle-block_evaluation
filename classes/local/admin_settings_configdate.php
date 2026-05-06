@@ -21,7 +21,7 @@ use core\output\html_writer;
 /**
  * Date select for admin pages.
  *
- * @package   local_ai_manager
+ * @package   block_evaluation
  * @copyright 2025 ISB Bayern
  * @author    Philipp Memmel
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

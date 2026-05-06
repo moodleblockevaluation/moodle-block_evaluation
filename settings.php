@@ -22,22 +22,22 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 require_once(__DIR__ . '/classes/local/admin_settings_configdate.php');
 
 use block_evaluation\local\admin_setting_configdate;
 
-defined('MOODLE_INTERNAL') || die();
-
 if ($ADMIN->fulltree) {
     $settings->add(
         new admin_setting_configdate(
-           'block_evaluation/settings_timeopen',
+            'block_evaluation/settings_timeopen',
             get_string('frst_settings_timeopen', 'block_evaluation'),
             get_string('help_settings_timeopen', 'block_evaluation'),
             ['year' => 2020, 'mon' => 10, 'mday' => 1, 'hours' => 0, 'minutes' => 0]
         )
     );
-        
+
     $settings->add(
         new admin_setting_configdate(
             'block_evaluation/settings_timeclose',
