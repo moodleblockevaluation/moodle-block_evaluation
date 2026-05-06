@@ -61,6 +61,9 @@ $string['frst_settings_namelike'] = 'Contains:';
 $string['help_infotext'] = 'Enter the text to be displayed above the table here.';
 $string['frst_infotext'] = 'Infotext:';
 
+$string['trainer'] = 'Trainer';
+$string['participant'] = 'Participant';
+
 $string['access_denied'] = 'No permission to view.';
 
 $string['faqurl'] = '<a href="{$a}" target=\'_blank\'>FAQ</a>';

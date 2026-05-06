@@ -198,13 +198,13 @@ class block_evaluation extends block_base {
 
         // AUSGABE-Ende Dozent.
         if ($traineroutput) {
-            $output .= html_writer::tag('h4', get_string('astrainer', 'block_evaluation'));
+            $output .= html_writer::tag('h4', get_string('trainer', 'block_evaluation'));
             $output .= $traineroutput;
             $output .= "</tbody></table>";
         }
         // Ausgabe-Ende Student.
         if ($participantoutput) {
-            $output .= html_writer::tag('h4', get_string('asparticipant', 'block_evaluation'));
+            $output .= html_writer::tag('h4', get_string('participant', 'block_evaluation'));
             $output .= $participantoutput;
             $output .= "</tbody></table>";
         }
