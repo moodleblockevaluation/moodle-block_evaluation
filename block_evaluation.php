@@ -53,6 +53,8 @@
 
 */
 
+use core\output\html_writer;
+
 /**
  * Evaluation block main class.
  *
@@ -106,16 +108,24 @@ class block_evaluation extends block_base {
         $settingstimeopen = get_config('block_evaluation', 'settings_timeopen');
         $settingstimeclose = get_config('block_evaluation', 'settings_timeclose');
         $settingsnamelike = "%" . get_config('block_evaluation', 'settings_namelike') . "%";
+        $faqlink = '';
         $faqurl = get_config('block_evaluation', 'faqurl');
+        if ($faqurl !== '') {
+            $faqlink = get_string('faqurl', 'block_evaluation', $faqurl);
+        }
 
         if (is_siteadmin()) {
             $output .= get_string('access_denied', 'block_evaluation');
             $this->content->text = $output;
             return $this->content;
+        } else {
+            if ($settingsinfotext !== '') {
+                $output .= html_writer::tag('p', $settingsinfotext);
+            }
         }
 
-        // 1. ALLE FEEDBACKS LADEN (zentral)
-        // Nur im Evaluationszeitraum lt. config und Name: Lehrevaluation beinhaltet
+        // 1. LOAD ALL FEEDBACK (centrally)
+        // Only during the evaluation period specified in the configuration and matching the name pattern.
         $sql = "
             SELECT f.id AS feedbackid,
                    f.name AS feedbackname,
@@ -125,10 +135,10 @@ class block_evaluation extends block_base {
                    f.timeopen,
                    f.timeclose,
 
-                   -- Status (für Teilnehmer)
+                   -- Status (for students)
                    fc.id AS completedid,
 
-                   -- Anzahl Antworten
+                   -- Number of answers
                    (
                        SELECT COUNT(fc2.id)
                        FROM {feedback_completed} fc2
@@ -152,39 +162,44 @@ class block_evaluation extends block_base {
             'fname' => $settingsnamelike]
         );
 
-        // Arrays für getrennte Anzeige.
-        $participantoutput = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
-            get_string('tableheader_1', 'block_evaluation') . "<th>" .
-            get_string('tableheader_2', 'block_evaluation') . "<th>" .
-            get_string('tableheader_3', 'block_evaluation') . "<th>" .
+        $showstudentoutput = false;
+        $showteacheroutput = false;
+
+        // Arrays for separate display.
+        $studentoutput = "<table class=\"table table-striped table-hover\"><thead><tr><th>" .
+            get_string('tableheader_1', 'block_evaluation') . "</th><th>" .
+            get_string('tableheader_2', 'block_evaluation') . "</th><th>" .
+            get_string('tableheader_3', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
 
-        $traineroutput = "<table class=\"table table-bordered table-striped table-hover\"><thead><tr><th>" .
-            get_string('tableheader_1', 'block_evaluation') . "<th>" .
-            get_string('tableheader_2', 'block_evaluation') . "<th>" .
-            get_string('tableheader_3', 'block_evaluation') . "<th>Studenten insgesamt</th><th>" .
+        $teacheroutput = "<table class=\"table table-striped table-hover\"><thead><tr><th>" .
+            get_string('tableheader_1', 'block_evaluation') . "</th><th>" .
+            get_string('tableheader_2', 'block_evaluation') . "</th><th>" .
+            get_string('tableheader_3', 'block_evaluation') . "</th><th>" .
+            get_string('totalparticipants', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
 
         foreach ($records as $rec) {
             $context = context_course::instance($rec->courseid);
             $url = new moodle_url('/mod/feedback/view.php', ['id' => $rec->cmid]);
             $link = html_writer::link($url, format_string($rec->feedbackname));
-            $icon = 't/completion_fail';
-            // TRAINER.
+            // TEACHERS.
             if (has_capability('mod/feedback:viewreports', $context)) {
-                // Anzahl Kursraumteilnehmer/innen ermitteln.
+                // Determine the number of students in the course.
                 $participants = count_enrolled_users($context, 'mod/feedback:complete', 0, true);
-                // Trainer nur eigene anzeigen.
+                // Teacher: show only your own.
                 if (str_contains($rec->feedbackname, $USER->username)) {
-                    $traineroutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
-                    $rec->feedbackname . "</td><td>" . $rec->timeclose . "</td><td>" . $participants .
+                    $showteacheroutput = true;
+                    $teacheroutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
+                    $link . "</td><td>" . $rec->timeclose . "</td><td>" . $participants .
                     "</td><td>" . $rec->responsecount . "</td></tr>";
                 }
             }
-            // TEILNEHMER.
+            // STUDENTS.
             if (has_capability('mod/feedback:complete', $context)) {
                 // User enrolled in course?
-                if (is_enrolled($context, $USER, '', true)) {
+                if (is_enrolled($context, $USER, 'mod/feedback:complete', true)) {
+                    $showstudentoutput = true;
                     if (!empty($rec->completedid)) {
                         $status = get_string('completed', 'block_evaluation');
                         $icon = 't/check';
@@ -194,36 +209,39 @@ class block_evaluation extends block_base {
                         $icon = 't/completion_fail';
                         $iconclass = 'text-danger';
                     }
-                    $participantoutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
-                    $rec->feedbackname . "</td><td>" . $rec->timeclose . "</td><td>" .
+                    $studentoutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
+                    $link . "</td><td>" . $rec->timeclose . "</td><td>" .
                     $OUTPUT->action_icon(
-                        'https://www.moodle.org',
+                        $url,
                         new \pix_icon($icon, $status, '', ['class' => 'iconsmall ' . $iconclass]),
                         null,
                         ['title' => $status, 'class' => '']
                     )
-                    . "</td><tr>";
+                    . "</td></tr>";
                 }
             }
         }
 
-        // AUSGABE-Ende Dozent.
-        if ($traineroutput) {
-            $output .= html_writer::tag('h4', get_string('trainer', 'block_evaluation'));
-            $output .= $traineroutput;
+        // End of display teachers.
+        if ($showteacheroutput) {
+            $output .= html_writer::tag('h4', get_string('trainer', 'block_evaluation'), ['class' => 'h5']);
+            $output .= $teacheroutput;
             $output .= "</tbody></table>";
         }
-        // Ausgabe-Ende Student.
-        if ($participantoutput) {
-            $output .= html_writer::tag('h4', get_string('participant', 'block_evaluation'));
-            $output .= $participantoutput;
+        // End of display students.
+        if ($showstudentoutput) {
+            $output .= html_writer::tag('h4', get_string('participant', 'block_evaluation'), ['class' => 'h5']);
+            $output .= $studentoutput;
             $output .= "</tbody></table>";
         }
 
-        if (!$traineroutput && !$participantoutput) {
-            $output .= get_string('nofeedbacks', 'block_evaluation');
+        if (!$showteacheroutput && !$showstudentoutput) {
+            $output .= html_writer::tag('p', get_string('nofeedbacks', 'block_evaluation'));
         }
-        $output .= get_string('faqurl', 'block_evaluation', $faqurl);
+
+        if ($faqlink !== '') {
+            $output .= html_writer::tag('p', $faqlink);
+        }
         $this->content->text = $output;
         return $this->content;
     }
