@@ -65,6 +65,9 @@ $string['frst_infotext'] = 'Infotext:';
 
 $string['access_denied'] = 'Keine Berechtigung zur Ansicht.';
 
+$string['frst_faqurl'] = 'FAQ URL:';
+$string['help_faqurl'] = 'URL zur Hilfe/FAQ vom Evaluations Block.';
+
 // Strings:table header.
 $string['tableheader_1'] = 'Modulname';
 $string['tableheader_2'] = 'Alle Evaluationen';
