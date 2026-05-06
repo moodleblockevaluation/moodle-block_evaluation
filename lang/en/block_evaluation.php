@@ -70,6 +70,9 @@ $string['faqurl'] = '<a href="{$a}" target=\'_blank\'>FAQ</a>';
 $string['frst_faqurl'] = 'FAQ URL:';
 $string['help_faqurl'] = 'URL to support/FAQ from evaluation block.';
 
+$string['open'] = 'open';
+$string['completed'] = 'completed';
+
 // Strings:table header.
 $string['tableheader_1'] = 'Module name';
 $string['tableheader_2'] = 'All evaluations';
