@@ -79,6 +79,10 @@ class block_evaluation extends block_base {
         return true;
     }
 
+    public function is_deanofstudies():bool {
+        return true;
+    }
+
     #[\Override]
     public function get_content() {
         global $DB;
@@ -123,6 +127,7 @@ class block_evaluation extends block_base {
                    cm.id AS cmid,
                    f.timeopen,
                    f.timeclose,
+                   cc.path,
 
                    -- Status (for students)
                    fc.id AS completedid,
@@ -137,6 +142,7 @@ class block_evaluation extends block_base {
             FROM {feedback} f
             JOIN {course} c ON c.id = f.course
             JOIN {modules} m ON m.name = 'feedback'
+            JOIN {course_categories} cc ON cc.id = c.category
             JOIN {course_modules} cm ON cm.instance = f.id AND cm.module = m.id
             LEFT JOIN {feedback_completed} fc ON fc.feedback = f.id AND fc.userid = :userid
             WHERE f.timeopen >= :fopen and f.timeclose <= :fclose and f.name like :fname
@@ -153,6 +159,7 @@ class block_evaluation extends block_base {
 
         $showstudentoutput = false;
         $showteacheroutput = false;
+        $showdeanofstudiesoutput = false;
 
         // Arrays for separate display.
         $studentoutput = "<table class=\"table table-striped table-hover\"><thead><tr><th>" .
@@ -162,6 +169,13 @@ class block_evaluation extends block_base {
             get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
 
         $teacheroutput = "<table class=\"table table-striped table-hover\"><thead><tr><th>" .
+            get_string('tableheader_1', 'block_evaluation') . "</th><th>" .
+            get_string('tableheader_2', 'block_evaluation') . "</th><th>" .
+            get_string('tableheader_3', 'block_evaluation') . "</th><th>" .
+            get_string('totalparticipants', 'block_evaluation') . "</th><th>" .
+            get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
+
+        $deanofstudiesoutput = "<table class=\"table table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_2', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_3', 'block_evaluation') . "</th><th>" .
@@ -183,6 +197,16 @@ class block_evaluation extends block_base {
                     $link . "</td><td>" . userdate($rec->timeclose) . "</td><td>" . $participants .
                     "</td><td>" . $rec->responsecount . "</td></tr>";
                 }
+            }
+            // DEAN OF STUDIES.
+            // Determine the number of students in the course.
+            $participants = count_enrolled_users($context, 'mod/feedback:complete', 0, true);
+            // Teacher: show only your own.
+            if ($this->is_deanofstudies()) {
+                $showdeanofstudiesoutput = true;
+                $deanofstudiesoutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
+                $link . "</td><td>" . userdate($rec->timeclose) . "</td><td>" . $participants .
+                "</td><td>" . $rec->responsecount . "</td></tr>";
             }
             // STUDENTS.
             if (has_capability('mod/feedback:complete', $context)) {
@@ -210,7 +234,12 @@ class block_evaluation extends block_base {
                 }
             }
         }
-
+        // End of display dean of studies.
+        if ($showdeanofstudiesoutput) {
+            $output .= html_writer::tag('h4', get_string('deanofstudies', 'block_evaluation'), ['class' => 'h5']);
+            $output .= $deanofstudiesoutput;
+            $output .= "</tbody></table>";
+        }
         // End of display teachers.
         if ($showteacheroutput) {
             $output .= html_writer::tag('h4', get_string('trainer', 'block_evaluation'), ['class' => 'h5']);
