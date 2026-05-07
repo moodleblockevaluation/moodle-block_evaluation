@@ -27,14 +27,19 @@
  * Checks if user is dean of studies
  *
  * @uses core_user::is_current_user
- * @param $role: the role of user, $path the path of the course category
+ * @param string $role the role of user
+ * @param string $path the path where to check whether the user has the role in
  * @return bool boolean returning true or false
  */
 function is_deanofstudies($role, $path): bool {
     global $DB;
     global $USER;
     $sql = "
-    SELECT if(cc.id is null,false,true) state
+
+    SELECT CASE
+       WHEN cc.id IS NULL THEN false
+       ELSE true
+     END AS state
     FROM {course_categories} cc
     INNER JOIN {context} cx ON cc.id = cx.instanceid AND cx.contextlevel = '40'
     INNER JOIN  {role_assignments} ra ON cx.id = ra.contextid
