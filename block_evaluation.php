@@ -53,8 +53,6 @@
 
 */
 
-use core\output\html_writer;
-
 /**
  * Evaluation block main class.
  *
@@ -62,15 +60,14 @@ use core\output\html_writer;
  * @copyright  Neubrandenburg University of Applied Sciences <support_moodle@hs-nb.de>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class block_evaluation extends block_base {
+class block_evaluation extends \block_base {
     /**
      * The initiation method.
      *
      * @return void
-     * @throws coding_exception
+     * @throws \coding_exception
      */
     public function init() {
-        global $CFG;
         $this->title = get_string('eval_block', 'block_evaluation');
     }
 
@@ -89,7 +86,7 @@ class block_evaluation extends block_base {
             return $this->content;
         }
 
-        $this->content = new stdClass();
+        $this->content = new \stdClass();
         $output = '';
 
         // Reading Block Settings.
@@ -109,7 +106,7 @@ class block_evaluation extends block_base {
             return $this->content;
         } else {
             if ($settingsinfotext !== '') {
-                $output .= html_writer::tag('p', $settingsinfotext);
+                $output .= \html_writer::tag('p', $settingsinfotext);
             }
         }
 
@@ -169,9 +166,9 @@ class block_evaluation extends block_base {
             get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
 
         foreach ($records as $rec) {
-            $context = context_course::instance($rec->courseid);
-            $url = new moodle_url('/mod/feedback/view.php', ['id' => $rec->cmid]);
-            $link = html_writer::link($url, format_string($rec->feedbackname));
+            $context = \context_course::instance($rec->courseid);
+            $url = new \moodle_url('/mod/feedback/view.php', ['id' => $rec->cmid]);
+            $link = \html_writer::link($url, format_string($rec->feedbackname));
             // TEACHERS.
             if (has_capability('mod/feedback:viewreports', $context)) {
                 // Determine the number of students in the course.
@@ -213,25 +210,27 @@ class block_evaluation extends block_base {
 
         // End of display teachers.
         if ($showteacheroutput) {
-            $output .= html_writer::tag('h4', get_string('trainer', 'block_evaluation'), ['class' => 'h5']);
+            $output .= \html_writer::tag('h4', get_string('trainer', 'block_evaluation'), ['class' => 'h5']);
             $output .= $teacheroutput;
             $output .= "</tbody></table>";
         }
         // End of display students.
         if ($showstudentoutput) {
-            $output .= html_writer::tag('h4', get_string('participant', 'block_evaluation'), ['class' => 'h5']);
+            $output .= \html_writer::tag('h4', get_string('participant', 'block_evaluation'), ['class' => 'h5']);
             $output .= $studentoutput;
             $output .= "</tbody></table>";
         }
 
         if (!$showteacheroutput && !$showstudentoutput) {
-            $output .= html_writer::tag('p', get_string('nofeedbacks', 'block_evaluation'));
+            $output .= \html_writer::tag('p', get_string('nofeedbacks', 'block_evaluation'));
         }
 
         if ($faqlink !== '') {
-            $output .= html_writer::tag('p', $faqlink);
+            $output .= \html_writer::tag('p', $faqlink);
         }
         $this->content->text = $output;
+        $table = new \block_evaluation\table\block_evaluation_feedback_table('uniqueid');
+        $this->content->text .= $table->get_content();
         return $this->content;
     }
 
