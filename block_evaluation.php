@@ -250,7 +250,7 @@ class block_evaluation extends block_base {
             $output .= "</tbody></table>";
         }
 
-        if (!$showteacheroutput && !$showstudentoutput) {
+        if (!$showteacheroutput && !$showstudentoutput && !$showdeanofstudiesoutput) {
             $output .= html_writer::tag('p', get_string('nofeedbacks', 'block_evaluation'));
         }
 
