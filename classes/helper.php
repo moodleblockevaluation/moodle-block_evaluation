@@ -67,4 +67,18 @@ class helper {
         }
         return false;
     }
+
+    /**
+     * Get what is the matching field for the evaluation feedback activity
+     *
+     * @return string Either 'name' or 'idnumber' is returned
+     */
+    public static function get_matchingcriterionfield(): string {
+        $settingsmatchingcriterion = get_config('block_evaluation', 'settings_matchingcriterion');
+        if ($settingsmatchingcriterion === 1) {
+            return 'idnumber';
+        } else {
+            return 'name';
+        }
+    }
 }

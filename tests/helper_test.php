@@ -50,4 +50,15 @@ final class helper_test extends \advanced_testcase {
         $this->setUser($user);
         $this->assertTrue(helper::is_deanofstudies($roleshortname, $categorypath));
     }
+
+    /**
+     * Tests the return of the matching criterion field.
+     *
+     * @covers \block_evaluation\helper::get_matchingcriterionfield
+     */
+    public function test_get_matchingcriterionfield(): void {
+        global $DB;
+        $this->resetAfterTest();
+        $this->assertSame('name', helper::get_matchingcriterionfield());
+    }
 }

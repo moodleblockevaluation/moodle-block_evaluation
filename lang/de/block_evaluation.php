@@ -60,6 +60,15 @@ $string['frst_settings_timeclose'] = 'Ende:';
 $string['help_settings_namelike'] = 'Der Name der Evaluation muss dies beinhalten.';
 $string['frst_settings_namelike'] = 'Beinhaltet:';
 
+$string['help_settings_namelike'] = 'Wenn eine Evaluation, welche eine Feedback-Aktivität ist, dies in "Name" hat, dann wird die Evaluation im Block angezeigt.';
+$string['frst_settings_namelike'] = 'Beinhaltet:';
+
+$string['help_settings_idnumberlike'] = 'Wenn eine Evaluation, welche eine Feedback-Aktivität ist, dies in "ID-Nummer" hat, dann wird die Evaluation im Block angezeigt.';
+$string['frst_settings_idnumberlike'] = 'Beinhaltet:';
+
+$string['help_settings_matchingcriterion'] = 'Ob das Matching nach "Name" oder "ID-Nummer" erfolgen soll.';
+$string['frst_settings_matchingcriterion'] = 'Kriterium:';
+
 $string['help_infotext'] = 'Hier den Text eintragen, der oberhalb der Tabelle angezeigt werden soll.';
 $string['frst_infotext'] = 'Infotext:';
 

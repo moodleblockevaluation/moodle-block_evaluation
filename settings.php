@@ -59,6 +59,28 @@ if ($ADMIN->fulltree) {
 
     $settings->add(
         new admin_setting_configtext(
+            'block_evaluation/settings_idnumberlike',
+            get_string('frst_settings_idnumberlike', 'block_evaluation'),
+            get_string('help_settings_idnumberlike', 'block_evaluation'),
+            'evaluation',
+            PARAM_TEXT,
+        )
+    );
+
+    $choices = [0 => get_string('name', 'moodle'),
+                1 => get_string('idnumber', 'moodle')];
+    $settings->add(
+        new admin_setting_configselect(
+            'block_evaluation/settings_matchingcriterion',
+            get_string('frst_settings_matchingcriterion', 'block_evaluation'),
+            get_string('help_settings_matchingcriterion', 'block_evaluation'),
+            0,
+            $choices
+        )
+    );
+
+    $settings->add(
+        new admin_setting_configtext(
             'block_evaluation/infotext',
             get_string('frst_infotext', 'block_evaluation'),
             get_string('help_infotext', 'block_evaluation'),

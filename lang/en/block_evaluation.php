@@ -55,8 +55,14 @@ $string['frst_settings_timeopen'] = 'Start:';
 $string['help_settings_timeclose'] = 'Enter the end of the evaluation here.';
 $string['frst_settings_timeclose'] = 'End:';
 
-$string['help_settings_namelike'] = 'The name of the evaluation must include this.';
+$string['help_settings_namelike'] = 'If an evaluation, which is a feedback activity, includes this in the "Name", then the evaluation will be displayed in the block.';
 $string['frst_settings_namelike'] = 'Contains:';
+
+$string['help_settings_idnumberlike'] = 'If an evaluation, which is a feedback activity, includes this in the "ID number", then the evaluation will be displayed in the block.';
+$string['frst_settings_idnumberlike'] = 'Contains:';
+
+$string['help_settings_matchingcriterion'] = 'Whether the "Name" or "ID number" matching should be used.';
+$string['frst_settings_matchingcriterion'] = 'Contains:';
 
 $string['help_infotext'] = 'Enter the text to be displayed above the table here.';
 $string['frst_infotext'] = 'Infotext:';
