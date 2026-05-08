@@ -15,26 +15,35 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library functions for the evaluation block.
+ * Evaluation block helper
  *
  * @package   block_evaluation
  * @copyright Neubrandenburg University of Applied Sciences <support_moodle@hs-nb.de>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace block_evaluation;
 
 /**
- * Checks if user is dean of studies
+ * Evaluation block helper
  *
- * @uses core_user::is_current_user
- * @param string $role the role of user
- * @param string $path the path where to check whether the user has the role in
- * @return bool boolean returning true or false
+ * @package   block_evaluation
+ * @copyright Neubrandenburg University of Applied Sciences <support_moodle@hs-nb.de>
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-function is_deanofstudies($role, $path): bool {
-    global $DB;
-    global $USER;
-    $sql = "
+class helper {
+    /**
+     * Checks if user is dean of studies
+     *
+     * @uses core_user::is_current_user
+     * @param string $role the role of user
+     * @param string $path the path where to check whether the user has the role in
+     * @return bool boolean returning true or false
+     */
+    public static function is_deanofstudies($role, $path): bool {
+        global $DB;
+        global $USER;
+        $sql = "
 
     SELECT CASE
        WHEN cc.id IS NULL THEN false
@@ -47,14 +56,15 @@ function is_deanofstudies($role, $path): bool {
     WHERE ra.userid = :userid and r.shortname = :role and cc.path = :path
     ORDER BY cc.depth, cc.path";
 
-    $records = $DB->get_records_sql(
-        $sql,
-        ['userid' => $USER->id,
+        $records = $DB->get_records_sql(
+            $sql,
+            ['userid' => $USER->id,
                 'role' => $role,
                 'path' => $path]
-    );
-    foreach ($records as $rec) {
-        return $rec->state;
+        );
+        foreach ($records as $rec) {
+            return $rec->state;
+        }
+        return false;
     }
-    return false;
 }

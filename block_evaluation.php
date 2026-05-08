@@ -53,11 +53,8 @@
 
 */
 
+use block_evaluation\helper;
 use core\output\html_writer;
-
-defined('MOODLE_INTERNAL') || die();
-
-require_once($CFG->dirroot . '/blocks/evaluation/lib.php');
 
 /**
  * Evaluation block main class.
@@ -202,7 +199,7 @@ class block_evaluation extends block_base {
             // Determine the number of students in the course.
             $participants = count_enrolled_users($context, 'mod/feedback:complete', 0, true);
             // Teacher: show only your own.
-            if (is_deanofstudies('dean', $rec->path)) {
+            if (helper::is_deanofstudies('dean', $rec->path)) {
                 $showdeanofstudiesoutput = true;
                 $deanofstudiesoutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
                 $link . "</td><td>" . userdate($rec->timeclose) . "</td><td>" . $participants .
