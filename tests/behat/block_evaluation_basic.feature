@@ -26,6 +26,14 @@ Feature: The evaluation block allow you to see what evaluation there are
       | feedback   | Lehrevaluation Dozent/in: teacher2 | C1     | feedback1 | ##yesterday## | ##tomorrow## |
 
   @javascript
+  Scenario: Plugin block_evaluation appears in the list of installed additional plugins
+    Given I log in as "admin"
+    When I navigate to "Plugins > Plugins overview" in site administration
+    And I follow "Additional plugins"
+    Then I should see "Evaluation block"
+    And I should see "block_evaluation"
+
+  @javascript
   Scenario: Add the evaluation block to user default dashboard
     Given I log in as "admin"
     And I navigate to "Plugins > Blocks > Evaluation block" in site administration
