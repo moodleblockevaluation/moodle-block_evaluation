@@ -103,6 +103,11 @@ class block_evaluation extends block_base {
         if ($faqurl !== '') {
             $faqlink = get_string('faqurl', 'block_evaluation', $faqurl);
         }
+        $deanrole = '';
+        $settingsdeanrolename = get_config('block_evaluation', 'settings_deanrolename');
+        if ($settingsdeanrolename !== '') {
+            $deanrole = get_string('settings_deanrolename', 'block_evaluation', $settingsdeanrolename);
+        }
 
         if (is_siteadmin()) {
             $output .= get_string('access_denied', 'block_evaluation');
@@ -199,7 +204,7 @@ class block_evaluation extends block_base {
             // Determine the number of students in the course.
             $participants = count_enrolled_users($context, 'mod/feedback:complete', 0, true);
             // Teacher: show only your own.
-            if (helper::is_deanofstudies('dean', $rec->path)) {
+            if (helper::is_deanofstudies($deanrole, $rec->path)) {
                 $showdeanofstudiesoutput = true;
                 $deanofstudiesoutput .= "<tr><td>" . format_string($rec->coursename) . "</td><td>" .
                 $link . "</td><td>" . userdate($rec->timeclose) . "</td><td>" . $participants .
@@ -257,6 +262,7 @@ class block_evaluation extends block_base {
         if ($faqlink !== '') {
             $output .= html_writer::tag('p', $faqlink);
         }
+
         $this->content->text = $output;
         return $this->content;
     }

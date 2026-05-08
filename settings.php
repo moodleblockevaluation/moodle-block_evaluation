@@ -76,4 +76,13 @@ if ($ADMIN->fulltree) {
             PARAM_TEXT,
         )
     );
+    $settings->add(
+        new admin_setting_configtext(
+            'block_evaluation/settings_deanrolename',
+            get_string('frst_deanrolename', 'block_evaluation'),
+            get_string('help_deanrolename', 'block_evaluation'),
+            'deanrole',
+            PARAM_TEXT,
+        )
+    );
 }
