@@ -109,6 +109,8 @@ class block_evaluation extends block_base {
             $deanrole = get_string('settings_deanrolename', 'block_evaluation', $settingsdeanrolename);
         }
 
+        $criterionfield = helper::get_matchingcriterionfield();
+
         if (is_siteadmin()) {
             $output .= get_string('access_denied', 'block_evaluation');
             $this->content->text = $output;
@@ -147,7 +149,7 @@ class block_evaluation extends block_base {
             JOIN {course_categories} cc ON cc.id = c.category
             JOIN {course_modules} cm ON cm.instance = f.id AND cm.module = m.id
             LEFT JOIN {feedback_completed} fc ON fc.feedback = f.id AND fc.userid = :userid
-            WHERE f.timeopen >= :fopen and f.timeclose <= :fclose and f.name like :fname
+            WHERE f.timeopen >= :fopen and f.timeclose <= :fclose and f." . $criterionfield . " like :fname
             ORDER BY c.fullname, f.name
         ";
 

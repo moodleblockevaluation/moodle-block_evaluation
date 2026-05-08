@@ -50,7 +50,7 @@ class helper {
        ELSE true
      END AS state
     FROM {course_categories} cc
-    INNER JOIN {context} cx ON cc.id = cx.instanceid AND cx.contextlevel = '40'
+    INNER JOIN {context} cx ON cc.id = cx.instanceid AND cx.contextlevel = " . CONTEXT_COURSECAT . "
     INNER JOIN  {role_assignments} ra ON cx.id = ra.contextid
     INNER JOIN  {role} r ON ra.roleid = r.id
     WHERE ra.userid = :userid and r.shortname = :role and cc.path = :path
