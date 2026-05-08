@@ -73,6 +73,10 @@ $string['faqurl'] = '<a href="{$a}" target=\'_blank\'>FAQ</a>';
 $string['frst_faqurl'] = 'FAQ URL:';
 $string['help_faqurl'] = 'URL to support/FAQ from evaluation block.';
 
+$string['settings_deanrolename'] = '{$a}';
+$string['frst_deanrolename'] = 'Dean of Studies Role';
+$string['help_deanrolename'] = 'Name of the Role of Dean of studies';
+
 $string['open'] = 'open';
 $string['completed'] = 'completed';
 

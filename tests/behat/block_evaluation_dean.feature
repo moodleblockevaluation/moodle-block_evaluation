@@ -53,6 +53,7 @@ Feature: The evaluation block allows the dean to see what evaluation there are
       | menus_block_evaluation_settings_timeclosehours   | 0                      |
       | menus_block_evaluation_settings_timecloseminutes | 0                      |
       | s_block_evaluation_faqurl                        | https://www.moodle.org |
+      | s_block_evaluation_settings_deanrolename         | dean                   |
     And I press "Save changes"
     And I navigate to "Appearance > Default Dashboard page" in site administration
     And I turn editing mode on
