@@ -79,4 +79,5 @@ Feature: The evaluation block allows the dean to see what evaluation there are
     And I should see "Lehrevaluation Dozent/in: teacher5" in the ".block_evaluation" "css_element"
     And I should see "Lehrevaluation Dozent/in: teacher6" in the ".block_evaluation" "css_element"
     But I should not see "Lehrevaluation Dozent/in: teacher1" in the ".block_evaluation" "css_element"
+    And I should not see "No feedbacks"
     And "a[target='_blank'][href='https://www.moodle.org']" "css_element" should exist
