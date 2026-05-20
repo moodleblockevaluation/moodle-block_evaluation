@@ -5,31 +5,50 @@
 [![License GPL-3.0](https://img.shields.io/github/license/moodleblockevaluation/moodle-block_evaluation?color=lightgrey)](https://github.com/moodleblockevaluation/moodle-block_evaluation/blob/main/LICENSE)
 [![GitHub contributors](https://img.shields.io/github/contributors/moodleblockevaluation/moodle-block_evaluation)](https://github.com/moodleblockevaluation/moodle-block_evaluation/graphs/contributors)
 
-Projekt - Online-Lehrevaluatio Hochschule Neubrandenburg mittels Moodle Feedback und Zusatztools 
+Projekt - Online-Lehrevaluation Hochschule Neubrandenburg mittels Moodle Feedback und Zusatztools 
 
 Projektleitung: Dipl.-Inform. J. Schäfer 
 
-2026: 
-Projektleitung: Luca Bösch 
-Projektteilnehmer:  
-            Max Fromme 
-            Christian Peske 
+* 2026:  
+  * Projektleitung: Luca Bösch  
+  * Projektteilnehmer: Max Fromme,  Christian Peske  
 
 Block Evaluation
 =================
 
-This block plugin provides a course room wide overview for students: 
--which online evaluations are due
--which have already been processed (check mark)
--which still need to be processed (cross)
+This block plugin displays, on a role-by-role basis, the upcoming teaching evaluations due within the specified evaluation period for the roles
+* Dean of Studies
+* Lecturers
+* Students
+in the dashboard.
+
+To this end, additional role-specific information is provided for each teaching evaluation, such as
+* Dean of Studies
+  expected number of response records (number of active course room participants) | current number of response records
+* Lecturers
+  expected number of response records (number of active course room participants) | current number of response records
+* Students
+  processing status (completed | still to be completed)   
+
+The role of Dean of Studies is assigned at course category level.
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-In diesem Block Plugin wird eine kursraumübergreifende Übersicht für Studierende gegeben: 
--welche Onlineevaluationen anliegen
--welche schon bearbeitet wurden (Haken)
--welche noch bearbeitet werden müssen (Kreuz)
+In diesem Block-Plugin werden rollenbasiert die in der festgelegten Lehrevaluationszeit anstehenden Lehrevaluationen für die Rollen
+* Studiendekan
+* Lehrende
+* Studierende
+im Dashboard angezeigt.
 
+Dazu werden rollenbasiert weitere Informationen je Lehrevaluation bereitgestellt wie
+* Studiendekan
+   voraussichtliche Anzahl der Antwortdatensätze (Anzahl aktive Kursraumteilnehmer*innen) | aktuelle Anzahl der Antwortdatensätze
+* Lehrende
+  voraussichtliche Anzahl der Antwortdatensätze (Anzahl aktive Kursraumteilnehmer*innen) | aktuelle Anzahl der Antwortdatensätze
+* Studierende
+  Status der Bearbeitung (ausgefüllt | noch auszufüllen)   
+
+Die Rolle Studiedekan wird auf Kurskategorieebene zugeteilt.
 
 
 How it works/ Wie es funktioniert
