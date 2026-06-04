@@ -166,20 +166,20 @@ class block_evaluation extends block_base {
         $showdeanofstudiesoutput = false;
 
         // Arrays for separate display.
-        $studentoutput = "<table class=\"table table-striped table-hover\"><thead><tr><th>" .
+        $studentoutput = "<table id=\"evalstud\" class=\"table table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_2', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_3', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
 
-        $teacheroutput = "<table class=\"table table-striped table-hover\"><thead><tr><th>" .
+        $teacheroutput = "<table id=\"evaldoz\" class=\"table table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_2', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_3', 'block_evaluation') . "</th><th>" .
             get_string('totalparticipants', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
 
-        $deanofstudiesoutput = "<table class=\"table table-striped table-hover\"><thead><tr><th>" .
+        $deanofstudiesoutput = "<table id=\"evaldean\" class=\"table table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_2', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_3', 'block_evaluation') . "</th><th>" .
