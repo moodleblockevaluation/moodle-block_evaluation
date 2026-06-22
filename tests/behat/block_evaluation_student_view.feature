@@ -57,7 +57,7 @@ Feature: The evaluation block allow you to see what evaluation there are
     And I log out
 
 @javascript
-  Scenario: check the view as a student
+  Scenario: Check the evaluation block view as a student
     When I log in as "student1"
     And I follow "Dashboard"
     Then I should see "Lehrevaluation Dozent/in: teacher1" in the ".block_evaluation" "css_element"
@@ -65,6 +65,6 @@ Feature: The evaluation block allow you to see what evaluation there are
     And "a[target='_blank'][href='https://www.moodle.org']" "css_element" should exist
     And "#evalstud" "css_element" should exist
     And I should not see "Total participants" in the "#evalstud" "css_element"
-    # Spalte Finished? soll bei student nur mit Haken oder Kreuz angezeigt werden, nicht mit der Anzahl der Datensätze
+    # For 'student', the 'Finished?' column should display only a checkmark or an 'X', not the number of records
     And I should not see "[0-100]" in the "#evalstud" "css_element"
     And I log out
