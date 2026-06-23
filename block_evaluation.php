@@ -172,7 +172,7 @@ class block_evaluation extends block_base {
             get_string('tableheader_3', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_4', 'block_evaluation') . "</th></tr></thead><tbody>";
 
-        $teacheroutput = "<table id=\"evaldoz\" class=\"table table-striped table-hover\"><thead><tr><th>" .
+        $teacheroutput = "<table id=\"evalteach\" class=\"table table-striped table-hover\"><thead><tr><th>" .
             get_string('tableheader_1', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_2', 'block_evaluation') . "</th><th>" .
             get_string('tableheader_3', 'block_evaluation') . "</th><th>" .

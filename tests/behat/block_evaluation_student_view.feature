@@ -1,0 +1,70 @@
+@block @block_evaluation
+Feature: The evaluation block allow you to see what evaluation there are
+  In order to enable the evaluation block on the user dashboard
+  As an admin
+  I can add the evaluation block to all user's dashboard
+
+  Background:
+    Given the following "courses" exist:
+      | fullname | shortname | category |
+      | Course 1 | C1        | 0        |
+    And the following "users" exist:
+      | username | firstname | lastname | email                | institution |
+      | teacher1 | Teacher   | 1        | teacher1@example.com | MA          |
+      | teacher2 | Teacher   | 1        | teacher2@example.com | MA          |
+      | student1 | Student   | 1        | student1@example.com | STUD        |
+      | student2 | Student   | 2        | student2@example.com | STUD        |
+    And the following "course enrolments" exist:
+      | user     | course | role           |
+      | teacher1 | C1     | editingteacher |
+      | student1 | C1     | student        |
+      | teacher2 | C1     | editingteacher |
+      | student2 | C1     | student        |
+    And the following "activities" exist:
+      | activity   | name                               | course | idnumber  | timeopen      | timeclose    |
+      | feedback   | Lehrevaluation Dozent/in: teacher1 | C1     | feedback0 | ##yesterday## | ##tomorrow## |
+      | feedback   | Lehrevaluation Dozent/in: teacher2 | C1     | feedback1 | ##yesterday## | ##tomorrow## |
+
+    Given I log in as "admin"
+    And I navigate to "Plugins > Blocks > Evaluation block" in site administration
+    And I set the following fields to these values:
+
+      | menus_block_evaluation_settings_timeopenmday     | 1                      |
+      | menus_block_evaluation_settings_timeopenmon      | 1                      |
+      | menus_block_evaluation_settings_timeopenyear     | 2020                   |
+      | menus_block_evaluation_settings_timeopenhours    | 0                      |
+      | menus_block_evaluation_settings_timeopenminutes  | 0                      |
+      | menus_block_evaluation_settings_timeclosemday    | 1                      |
+      | menus_block_evaluation_settings_timeclosemon     | 1                      |
+      | menus_block_evaluation_settings_timecloseyear    | 2030                   |
+      | menus_block_evaluation_settings_timeclosehours   | 0                      |
+      | menus_block_evaluation_settings_timecloseminutes | 0                      |
+      | s_block_evaluation_faqurl                        | https://www.moodle.org |
+    And I press "Save changes"
+    And I navigate to "Appearance > Default Dashboard page" in site administration
+    And I turn editing mode on
+    And I add the "Evaluation block" block
+    And I configure the "Overview of evaluations" block
+    And I set the following fields to these values:
+
+      | Region | content |
+      | Weight | -9      |
+    And I press "Save changes"
+    And I wait until the page is ready
+    And I press "Reset Dashboard for all users"
+    And I should see "All Dashboard pages have been reset to default."
+    And I press "Continue"
+    And I log out
+
+@javascript
+  Scenario: Check the evaluation block view as a student
+    When I log in as "student1"
+    And I follow "Dashboard"
+    Then I should see "Lehrevaluation Dozent/in: teacher1" in the ".block_evaluation" "css_element"
+    And I should see "Lehrevaluation Dozent/in: teacher2" in the ".block_evaluation" "css_element"
+    And "a[target='_blank'][href='https://www.moodle.org']" "css_element" should exist
+    And "#evalstud" "css_element" should exist
+    And I should not see "Total participants" in the "#evalstud" "css_element"
+    # For 'student', the 'Finished?' column should display only a checkmark or an 'X', not the number of records
+    And I should not see "[0-100]" in the "#evalstud" "css_element"
+    And I log out
