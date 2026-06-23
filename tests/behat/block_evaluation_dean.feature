@@ -65,9 +65,9 @@ Feature: The evaluation block allows the dean to see what evaluation there are
     And I set the field "drums" to "1"
     And I press "Submit your answers"
     And I press "Continue"
-	And I log out
+    And I log out
 	# admin set parameters in settings "Evaluation Block"
-	Given I log in as "admin"
+    Given I log in as "admin"
     And I navigate to "Plugins > Blocks > Evaluation block" in site administration
     And I set the following fields to these values:
       | menus_block_evaluation_settings_timeopenmday     | 1                      |
@@ -106,7 +106,7 @@ Feature: The evaluation block allows the dean to see what evaluation there are
     And I follow "Dashboard"
     Then I should see "Dean of studies" in the ".block_evaluation" "css_element"
     And I should see "Lehrevaluation Dozent/in: teacher1" in the ".block_evaluation" "css_element"
-	And I should see "Lehrevaluation Dozent/in: teacher2" in the ".block_evaluation" "css_element"
+    And I should see "Lehrevaluation Dozent/in: teacher2" in the ".block_evaluation" "css_element"
     But I should not see "Lehrevaluation Dozent/in: teacher5" in the ".block_evaluation" "css_element"
     And "a[target='_blank'][href='https://www.moodle.org']" "css_element" should exist
     And "Lehrevaluation Dozent/in: teacher1" row "Total participants" column of "evaldean" table should contain "2"
@@ -117,7 +117,7 @@ Feature: The evaluation block allows the dean to see what evaluation there are
     And "Lehrevaluation Dozent/in: teacher3" row "Finished?" column of "evaldean" table should contain "0"
     And "Lehrevaluation Dozent/in: teacher4" row "Total participants" column of "evaldean" table should contain "0"
     And "Lehrevaluation Dozent/in: teacher4" row "Finished?" column of "evaldean" table should contain "0"
-	And I log out
+    And I log out
 	# dean of studies "dean2" see all "Evaluation" in there coursecategories
 	# Lehrevaluation Dozent/in: teacher5  0 enrolments 0 answer
 	# Lehrevaluation Dozent/in: teacher6  0 enrolments 0 answer
