@@ -54,7 +54,6 @@ Feature: The evaluation block allows the dean to see what evaluation there are
         | Multiple choice values | drums \nguitar \nhurdygurdy           |
     And I log out
 
-
   @javascript
   Scenario: Add the evaluation block to user default dashboard and view as dean1 and dean2
 	in course C1 we have 2 enrolments as participants and 1 answer in Lehrevaluation Dozent/in: teacher1
