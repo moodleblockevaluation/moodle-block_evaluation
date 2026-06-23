@@ -59,7 +59,7 @@ Feature: The evaluation block allows the dean to see what evaluation there are
   Scenario: Add the evaluation block to user default dashboard and view as dean1 and dean2
 	in course C1 we have 2 enrolments as participants and 1 answer in Lehrevaluation Dozent/in: teacher1
 	in all other courses we habe 0 enrolments as participants and 0 answers
-	
+
 	# student1 answer in Course "C1" the activity feedback with name "Lehrevaluation Dozent/in: teacher1"
     Given I am on the "Lehrevaluation Dozent/in: teacher1" "feedback activity" page logged in as student1
     When I follow "Answer the questions"
@@ -67,7 +67,7 @@ Feature: The evaluation block allows the dean to see what evaluation there are
     And I press "Submit your answers"
     And I press "Continue"
 	And I log out
-	# admin set parameters in settings "Evaluation Block" 
+	# admin set parameters in settings "Evaluation Block"
 	Given I log in as "admin"
     And I navigate to "Plugins > Blocks > Evaluation block" in site administration
     And I set the following fields to these values:
@@ -101,13 +101,13 @@ Feature: The evaluation block allows the dean to see what evaluation there are
 	# Lehrevaluation Dozent/in: teacher1  2 enrolments 1 answer
 	# Lehrevaluation Dozent/in: teacher2  2 enrolments 0 answer
 	# Lehrevaluation Dozent/in: teacher3  0 enrolments 0 answer
-	# Lehrevaluation Dozent/in: teacher4  0 enrolments 0 answer	
+	# Lehrevaluation Dozent/in: teacher4  0 enrolments 0 answer
 	# no more Lehrevaluation
     When I log in as "dean1"
     And I follow "Dashboard"
     Then I should see "Dean of studies" in the ".block_evaluation" "css_element"
-    And I should see "Lehrevaluation Dozent/in: teacher1" in the ".block_evaluation" "css_element" 
-    And I should see "Lehrevaluation Dozent/in: teacher2" in the ".block_evaluation" "css_element"
+    And I should see "Lehrevaluation Dozent/in: teacher1" in the ".block_evaluation" "css_element"
+	And I should see "Lehrevaluation Dozent/in: teacher2" in the ".block_evaluation" "css_element"
     But I should not see "Lehrevaluation Dozent/in: teacher5" in the ".block_evaluation" "css_element"
     And "a[target='_blank'][href='https://www.moodle.org']" "css_element" should exist
     And "Lehrevaluation Dozent/in: teacher1" row "Total participants" column of "evaldean" table should contain "2"
@@ -123,7 +123,7 @@ Feature: The evaluation block allows the dean to see what evaluation there are
 	# Lehrevaluation Dozent/in: teacher5  0 enrolments 0 answer
 	# Lehrevaluation Dozent/in: teacher6  0 enrolments 0 answer
 	# Lehrevaluation Dozent/in: teacher7  0 enrolments 0 answer
-	# Lehrevaluation Dozent/in: teacher8  0 enrolments 0 answer	
+	# Lehrevaluation Dozent/in: teacher8  0 enrolments 0 answer
 	# no more Lehrevaluation
     And I log in as "dean2"
     And I follow "Dashboard"
